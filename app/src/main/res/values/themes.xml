@@ -2,7 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Motif" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/cape_cod</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/sorrell_brown</item>
+        <!-- Accent colors. -->
+        <item name="colorAccent">@color/beaver</item>
+
+        <item name="android:windowContentTransitions">true</item>
+
     </style>
 
     <style name="Theme.Motif" parent="Base.Theme.Motif" />
