@@ -12,13 +12,15 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/motif_logo_dark"/>
+        android:src="@drawable/motif_logo_dark"
+        android:transitionName="logo_image"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome"
         android:textSize="40sp"
+        android:transitionName="logo_text"
         android:fontFamily="@font/bebas_neue"
         android:layout_marginTop="-20dp"/>
 
@@ -53,7 +55,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
-            app:counterEnabled="true"
             app:counterMaxLength="15"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
