@@ -47,9 +47,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,9 +62,10 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,16 +80,18 @@
             android:layout_margin="5dp"/>
 
         <Button
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GO"
-            android:background="#C6A180"
-            android:textColor="#fff"
             android:layout_margin="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:background="#C6A180"
+            android:onClick="attemptLogin"
+            android:text="GO"
+            android:textColor="#FFFFFF"
+            tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/signup_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
