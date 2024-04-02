@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernameInput);
         passwordEditText = findViewById(R.id.passwordInput);
         Button submitButton = findViewById(R.id.submit);
-		callSignUp = findViewById(R.id_signup_screen);
+		callSignUp = findViewById(R.id.signup_screen);
 		callSignUp.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View view){
