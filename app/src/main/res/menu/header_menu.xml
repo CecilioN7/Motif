@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group1"
+        >
+        <item
+            android:id="@+id/home"
+            android:title="@string/home"
+            android:icon="@drawable/baseline_cottage_24"
+            />
+        <item
+            android:id="@+id/profile"
+            android:title="@string/logout"
+            android:icon="@drawable/baseline_account_circle_24"
+            />
+
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        >
+        <item
+            android:id="@+id/transpose"
+            android:title="@string/transpose"
+            android:icon="@drawable/baseline_audiotrack_24"
+            />
+        <item
+            android:id="@+id/settings"
+            android:title="@string/settings"
+            android:icon="@drawable/baseline_app_settings_alt_24"
+            />
+
+    </group>
+
+</menu>
