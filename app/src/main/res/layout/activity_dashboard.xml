@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Dashboard"
     android:id="@+id/drawerLayout"
-    tools:openDrawer="start">
+    tools:openDrawer="start" >
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -22,12 +22,11 @@
                 android:id="@+id/materialToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#8E6B58"
-                app:title="Motif Navbar"
-                app:titleTextColor="#FFFF"
-                app:navigationIcon="@drawable/baseline_menu_24"
+                android:background="@color/cape_cod"
                 app:menu="@menu/nav_menu"
-                />
+                app:navigationIcon="@drawable/baseline_menu_24"
+                app:title="Dashboard"
+                app:titleTextColor="@color/desert_storm" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -36,23 +35,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
-            android:background="#604CAF50"
-            />
+            android:background="@color/desert_storm" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
-        android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/desert_storm"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/header_menu"
-
-        />
-
-
-
+        app:menu="@menu/header_menu" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
