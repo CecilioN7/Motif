@@ -169,6 +169,9 @@ public class Login extends AppCompatActivity {
                 }
             }
             result = responseOutput.toString();
+            if (result.equals("[]")) {
+                return false;
+            }
             returnedJSON = new JSONArray(result);
             //Log.d("Result: ", String.valueOf(jsonResponse));
 
