@@ -17,6 +17,9 @@
             android:name=".Login"
             android:exported="false" />
         <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
             android:name=".Dashboard"
             android:exported="false" />
         <activity
