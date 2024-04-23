@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -58,8 +59,10 @@ public class Dashboard extends AppCompatActivity {
                     Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (menuItem.getItemId()==R.id.transpose) {
-                    Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(Dashboard.this, TransposeActivity.class);
+                    startActivity(intent);
+                    //Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
+                    //drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (menuItem.getItemId()==R.id.settings) {
                     Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
@@ -69,3 +72,5 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 }
+
+

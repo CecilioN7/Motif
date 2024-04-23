@@ -9,4 +9,7 @@
     <string name="transpose">Transpose</string>
     <string name="drawer_close">Close Drawer</string>
     <string name="drawer_open">Open Drawer</string>
+    <string name="button">Button</string>
+    <string name="detected_music_notes">Detected Music Notes:</string>
+    <string name="play">Play</string>
 </resources>
