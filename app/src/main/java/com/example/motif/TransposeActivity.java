@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -56,6 +57,17 @@ public class TransposeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //stop the recording
                 Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
+                if (mediaRecorder != null) {
+                    try {
+                        mediaRecorder.stop();
+                    } catch (IllegalStateException e) {
+
+                        e.printStackTrace();
+                    }
+                    mediaRecorder.reset();
+                    mediaRecorder.release();
+                    mediaRecorder = null;
+                }
             }
         });
 
@@ -68,8 +80,8 @@ public class TransposeActivity extends AppCompatActivity {
 
     // Microphone recording function
     private void micRecording() {
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        /* mediaRecorder = new MediaRecorder();
+         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
          mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
          mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
        // mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -77,7 +89,20 @@ public class TransposeActivity extends AppCompatActivity {
 
         // if we are just analyzing audio data in real time, we dont need an output file. set to null
         mediaRecorder.setOutputFile("/dev/null");
+*/
+        String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recorded_audio.mp4";
 
+
+        File outputFile = new File(outputPath);
+
+
+        MediaRecorder mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+
+
+        mediaRecorder.setOutputFile(outputFile.getAbsolutePath());
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
