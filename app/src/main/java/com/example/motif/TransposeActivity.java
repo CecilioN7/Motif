@@ -203,11 +203,28 @@ public class TransposeActivity extends AppCompatActivity {
     }
 
         public void noteTranslate(int x ,int y){
+            int listIndex = 0;
+            // double frequency = calculateFrequency(audioBuffer, bufferSize);
+            double frequency = 320.0;// test frequency
+            //String[] list = new String[2000];
             String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
 
             String fileName = fnum + ".txt";
             fnum = fnum + 1;
+            String note = noteFrequency(frequency);// pass the frequency recorded
+            //--------------------------------------------------------------------------
 
+            while (listIndex < list.length && list[listIndex] != null) {
+                listIndex++;
+            }
+
+            if (listIndex == list.length) {
+                System.err.println("Warning: list array is full. Unable to add more notes.");
+                return;
+            }
+
+            list[listIndex] = note;
+            //-------------------------------------------------------------------------
             try {
                 FileWriter fwrite = new FileWriter(fileName);
                 BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
@@ -227,7 +244,36 @@ public class TransposeActivity extends AppCompatActivity {
         thread.interrupt();//end tread once done;
         }
 
+    public String noteFrequency(double frequency) {
+        if (frequency >= 261.63 && frequency < 293.66) {
+            return "C";
+        } else if (frequency >= 293.66 && frequency < 311.13) {
+            return "C#";
+        } else if (frequency >= 311.13 && frequency < 329.63) {
+            return "D";
+        } else if (frequency >= 329.63 && frequency < 349.23) {
+            return "D#";
+        } else if (frequency >= 349.23 && frequency < 369.99) {
+            return "E";
+        } else if (frequency >= 369.99 && frequency < 392.00) {
+            return "F";
+        } else if (frequency >= 392.00 && frequency < 415.30) {
+            return "F#";
+        } else if (frequency >= 415.30 && frequency < 440.00) {
+            return "G";
+        } else if (frequency >= 440.00 && frequency < 466.16) {
+            return "G#";
+        } else if (frequency >= 466.16 && frequency < 493.88) {
+            return "A";
+        } else if (frequency >= 493.88 && frequency < 523.25) {
+            return "A#";
+        } else if (frequency >= 523.25 && frequency < 554.37) {
+            return "B";
+        }
 
+        // If the frequency doesn't match any note, return an empty string or null
+        return "";
+    }
     // permission handler
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
