@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,8 +27,9 @@ public class TransposeActivity extends AppCompatActivity {
 
     private static final int writeRequest = 1;
     private boolean micFlag = false;
-
-    MediaRecorder mediaRecorder;
+    private Handler noteHandler = new Handler(); //test noteTranslate
+    private Random randnum = new Random(); //test noteTranslate
+    MediaRecorder mediaRecorder; //For mic recording
     Button buttonStart, buttonStop; // Add reference to button
     TextView recordedNoteTextView; // Add reference to the TextView
     TextView micStatusTextView;
@@ -37,7 +39,12 @@ public class TransposeActivity extends AppCompatActivity {
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
     MediaPlayer mediaPlayer;
-
+    int samplerate = 0; // Standard Hz sample rate
+    int channel =0;
+    int format = 0;
+    int buffer = 0;
+    short[] audiobuffer = new short[buffer / 2];
+    AudioRecord record;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +81,7 @@ public class TransposeActivity extends AppCompatActivity {
                         mediaRecorder.reset();
                         mediaRecorder.release();
                         mediaRecorder = null;
+                        recordedNoteTextView.setText("");
                         Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                         micStatusTextView.setText("Recording ended.");
                     } catch (IllegalStateException e) {
@@ -85,8 +93,8 @@ public class TransposeActivity extends AppCompatActivity {
         });
 
         //set text to display current note
-        String recordedNote = "C#"; //placeholder
-        recordedNoteTextView.setText("Note Played: " + recordedNote);
+        //String recordedNote = "C#"; //placeholder
+        //  recordedNoteTextView.setText("Note Played: " + recordedNote);
     }
 
 
@@ -109,12 +117,13 @@ public class TransposeActivity extends AppCompatActivity {
         mediaRecorder.setOutputFile(outputPath);
 
         //Set up audio analysis parameters
-        int samplerate = 44100; // Standard Hz sample rate
-        int channel = AudioFormat.CHANNEL_IN_MONO;
-        int format = AudioFormat.ENCODING_PCM_16BIT;
-        int buffer = AudioRecord.getMinBufferSize(samplerate, channel, format);
-        short[] audiobuffer = new short[buffer / 2];
-        AudioRecord record = new AudioRecord(MediaRecorder.AudioSource.MIC, samplerate, channel, format, buffer);
+        samplerate = 44100; // Standard Hz sample rate
+        channel = AudioFormat.CHANNEL_IN_MONO;
+        format = AudioFormat.ENCODING_PCM_16BIT;
+        buffer = AudioRecord.getMinBufferSize(samplerate, channel, format);
+
+        audiobuffer = new short[buffer / 2];
+        record = new AudioRecord(MediaRecorder.AudioSource.MIC, samplerate, channel, format, buffer);
 
 
         try {
@@ -126,6 +135,7 @@ public class TransposeActivity extends AppCompatActivity {
 
                 micStatusTextView.setText("Recording...");
                 //isRecording = true;
+                noteThread(); //while recording, call notesTranslate to indentify notes;
             }
             micFlag = true;
             if (micFlag == true) {
@@ -141,9 +151,56 @@ public class TransposeActivity extends AppCompatActivity {
 
     }
 
-    public void noteTranslate() throws IOException {
+    public void noteThread() throws IOException {
+        //--------------------------------------------------------------------------------------------------
+        //Text view test code to see if the function call to notesTranslate will update NotesTextView
+        noteHandler.postDelayed(new Runnable() {
+            @Override
 
+            public void run() {
+
+               // while (micFlag == true) {
+                    String[] notes = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
+                    String randomNote = notes[randnum.nextInt(notes.length)];
+
+                    recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
+
+                    try {
+                        if (micFlag == true) {
+                            noteThread();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+          //  }
+        }, 2000);
+
+        //--------------------------------------------------------------------------------------------------
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (micFlag) {
+
+                    byte[] buffersize = new byte[buffer];//data from audio
+
+                    //int bytesRead = record.read(buffer, 0, buffersize);
+                    int bytesRead = record.read(buffersize,0,buffer);
+                    if (bytesRead > 0) {
+                        // function call to translation function
+                        noteTranslate(buffer, bytesRead);
+                    }
+                }
+            }
+        });
+        thread.start();
     }
+
+        public void noteTranslate(int x ,int y){
+
+        }
+
 
     // permission handler
     @Override
