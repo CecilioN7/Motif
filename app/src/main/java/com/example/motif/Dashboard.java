@@ -64,8 +64,12 @@ public class Dashboard extends AppCompatActivity {
                     //Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
                     //drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (menuItem.getItemId()==R.id.settings) {
-                    Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(Dashboard.this, Settings.class);
+                    intent.putExtra("user", getIntent().getStringExtra("user"));
+
+                    startActivity(intent);
+                    //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                    //drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 return false;
             }
