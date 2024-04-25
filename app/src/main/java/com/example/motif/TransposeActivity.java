@@ -19,7 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
@@ -42,10 +44,11 @@ public class TransposeActivity extends AppCompatActivity {
     int samplerate = 0; // Standard Hz sample rate
     int channel =0;
     int format = 0;
-    int buffer = 0;
+    int buffer = 0 ;
     short[] audiobuffer = new short[buffer / 2];
     AudioRecord record;
     Thread thread;
+    int fnum = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +121,10 @@ public class TransposeActivity extends AppCompatActivity {
         mediaRecorder.setOutputFile(outputPath);
 
         //Set up audio analysis parameters
-        samplerate = 44100; // Standard Hz sample rate
+        samplerate = 44100; // Standard Hz sample rate, 44000
         channel = AudioFormat.CHANNEL_IN_MONO;
         format = AudioFormat.ENCODING_PCM_16BIT;
-        buffer = AudioRecord.getMinBufferSize(samplerate, channel, format);
+        buffer = 4 * AudioRecord.getMinBufferSize(samplerate, channel, format);
 
         audiobuffer = new short[buffer / 2];
         record = new AudioRecord(MediaRecorder.AudioSource.MIC, samplerate, channel, format, buffer);
@@ -155,7 +158,7 @@ public class TransposeActivity extends AppCompatActivity {
     public void noteThread() throws IOException {
         //--------------------------------------------------------------------------------------------------
         //Text view test code to see if the function call to notesTranslate will update NotesTextView
-        //Remove when notesTranslate is now function
+        //Remove when notesTranslate is functional
         noteHandler.postDelayed(new Runnable() {
             @Override
 
@@ -200,7 +203,27 @@ public class TransposeActivity extends AppCompatActivity {
     }
 
         public void noteTranslate(int x ,int y){
+            String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
 
+            String fileName = fnum + ".txt";
+            fnum = fnum + 1;
+
+            try {
+                FileWriter fwrite = new FileWriter(fileName);
+                BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
+
+
+                for (int i = 0; i < list.length; i++) {
+                    bufferedWriter.write(list[i]);
+                    bufferedWriter.write(' ');
+                }
+
+
+                bufferedWriter.close();// end write
+                System.out.println("File writing is done.");
+            } catch (IOException e) {
+                System.err.println("Error writing to file: " + e.getMessage());
+            }
         thread.interrupt();//end tread once done;
         }
 
