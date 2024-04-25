@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--<color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color> -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="desert_storm">#F5F4F3</color>
     <color name="pablo">#7E796A</color>
     <color name="sorrell_brown">#C6A180</color>
