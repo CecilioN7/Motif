@@ -35,6 +35,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.0.0")
     implementation("commons-validator:commons-validator:1.8.0")
+    implementation("androidx.preference:preference:1.2.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
