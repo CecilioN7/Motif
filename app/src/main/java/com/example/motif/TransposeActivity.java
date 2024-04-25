@@ -45,6 +45,7 @@ public class TransposeActivity extends AppCompatActivity {
     int buffer = 0;
     short[] audiobuffer = new short[buffer / 2];
     AudioRecord record;
+    Thread thread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +155,7 @@ public class TransposeActivity extends AppCompatActivity {
     public void noteThread() throws IOException {
         //--------------------------------------------------------------------------------------------------
         //Text view test code to see if the function call to notesTranslate will update NotesTextView
+        //Remove when notesTranslate is now function
         noteHandler.postDelayed(new Runnable() {
             @Override
 
@@ -178,7 +180,7 @@ public class TransposeActivity extends AppCompatActivity {
 
         //--------------------------------------------------------------------------------------------------
 
-        Thread thread = new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (micFlag) {
@@ -199,6 +201,7 @@ public class TransposeActivity extends AppCompatActivity {
 
         public void noteTranslate(int x ,int y){
 
+        thread.interrupt();//end tread once done;
         }
 
 

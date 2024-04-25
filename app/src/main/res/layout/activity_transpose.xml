@@ -61,10 +61,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="48sp"
+        android:fontFamily="@font/bebas_neue"
         app:layout_constraintEnd_toEndOf="@id/RecordButton"
         app:layout_constraintStart_toStartOf="@id/RecordButton"
         app:layout_constraintTop_toTopOf="@id/RecordButton"
-        android:layout_marginTop="-32dp"/>
+        android:layout_marginTop="-182dp"/>
     <TextView
         android:id="@+id/StatusTextView"
         android:layout_width="wrap_content"
@@ -75,6 +77,6 @@
         app:layout_constraintEnd_toEndOf="@id/RecordButton"
         app:layout_constraintStart_toStartOf="@id/RecordButton"
         app:layout_constraintTop_toTopOf="@id/RecordButton"
-        android:layout_marginTop="-72dp"/>
+        android:layout_marginTop="-62dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
