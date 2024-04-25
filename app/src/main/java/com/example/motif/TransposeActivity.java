@@ -21,10 +21,12 @@ import java.util.Random;
 
 public class TransposeActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+    MediaRecorder mediaRecorder;
     Button buttonStart, buttonStop;
     TextView recordedNoteTextView; // Add reference to the TextView
     String AudioSavePathInDevice = null;
-    MediaRecorder mediaRecorder;
+
     Random random;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
@@ -56,17 +58,16 @@ public class TransposeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //stop the recording
-                Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                 if (mediaRecorder != null) {
                     try {
                         mediaRecorder.stop();
+                        mediaRecorder.reset();
+                        mediaRecorder.release();
+                        mediaRecorder = null;
+                        Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                     } catch (IllegalStateException e) {
-
                         e.printStackTrace();
                     }
-                    mediaRecorder.reset();
-                    mediaRecorder.release();
-                    mediaRecorder = null;
                 }
             }
         });
@@ -80,39 +81,34 @@ public class TransposeActivity extends AppCompatActivity {
 
     // Microphone recording function
     private void micRecording() {
-        /* mediaRecorder = new MediaRecorder();
-         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-       // mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-       // mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        // Check if permission is granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Request the permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+            return;
+        }
 
-        // if we are just analyzing audio data in real time, we dont need an output file. set to null
-        mediaRecorder.setOutputFile("/dev/null");
-*/
-        String outputPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recorded_audio.mp4";
+        // Get the output directory
+        File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        String outputPath = directory.getAbsolutePath() + "/mic_recording.mp4";
+       // Toast.makeText(TransposeActivity.this, "Recording output to: " + outputPath, Toast.LENGTH_LONG).show();
 
-
-        File outputFile = new File(outputPath);
-
-
-        MediaRecorder mediaRecorder = new MediaRecorder();
+        mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        mediaRecorder.setOutputFile(outputPath);
 
-
-        mediaRecorder.setOutputFile(outputFile.getAbsolutePath());
         try {
             mediaRecorder.prepare();
             mediaRecorder.start();
-            Toast.makeText(TransposeActivity.this, "recording started", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TransposeActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(TransposeActivity.this, "recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
             e.printStackTrace();
-            Toast.makeText(TransposeActivity.this, "recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
