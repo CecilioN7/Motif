@@ -94,6 +94,7 @@ public class Login extends AppCompatActivity {
             handler.post(() -> {
                 if (result){
                     Intent toDash = new Intent(this, Dashboard.class);
+                    toDash.putExtra("user", usernameEditText.getText().toString());
                     startActivity(toDash);
                 } else {
                     CharSequence error = "Error login. Check your credentials!";
