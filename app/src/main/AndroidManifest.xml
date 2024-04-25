@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
-
+	
     <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- permssion for microphone -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- permssion for changing user audio -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- permssion for writing access -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- permssion for read access -->
-    <!--uses-permission android:name="android.permission.WRITE_SETTINGS" / -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Motif"
         tools:targetApi="31">
+        <activity
+            android:name=".Settings"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".Login"
             android:exported="false" />
