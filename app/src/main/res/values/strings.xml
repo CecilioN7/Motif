@@ -16,4 +16,5 @@
     <string name="record">Record</string>
     <string name="stop">STOP</string>
     <string name="todo">TODO</string>
+    <string name="go_back_to_dashboard">Go Back to dashboard</string>
 </resources>
