@@ -2,6 +2,8 @@ package com.example.motif;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -99,13 +101,20 @@ public class TransposeActivity extends AppCompatActivity {
         // Get the output directory
         File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         String outputPath = directory.getAbsolutePath() + "/mic_recording.mp4";
-        // Toast.makeText(TransposeActivity.this, "Recording output to: " + outputPath, Toast.LENGTH_LONG).show();
-
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mediaRecorder.setOutputFile(outputPath);
+
+        //Set up audio analysis parameters
+        int samplerate = 44100; // Standard Hz sample rate
+        int channel = AudioFormat.CHANNEL_IN_MONO;
+        int format = AudioFormat.ENCODING_PCM_16BIT;
+        int buffer = AudioRecord.getMinBufferSize(samplerate, channel, format);
+        short[] audiobuffer = new short[buffer / 2];
+        AudioRecord record = new AudioRecord(MediaRecorder.AudioSource.MIC, samplerate, channel, format, buffer);
+
 
         try {
             if (micFlag == false) {
