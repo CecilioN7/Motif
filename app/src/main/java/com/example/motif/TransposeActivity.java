@@ -21,10 +21,13 @@ import java.util.Random;
 
 public class TransposeActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+    private static final int writeRequest = 1;
+    private boolean micFlag = false;
+
     MediaRecorder mediaRecorder;
-    Button buttonStart, buttonStop;
+    Button buttonStart, buttonStop; // Add reference to button
     TextView recordedNoteTextView; // Add reference to the TextView
+    TextView micStatusTextView;
     String AudioSavePathInDevice = null;
 
     Random random;
@@ -40,6 +43,8 @@ public class TransposeActivity extends AppCompatActivity {
         buttonStart = findViewById(R.id.RecordButton);
         buttonStop = findViewById(R.id.StopButton);
         recordedNoteTextView = findViewById(R.id.NoteTextView);
+        micStatusTextView = findViewById(R.id.StatusTextView);
+
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +52,7 @@ public class TransposeActivity extends AppCompatActivity {
                 if (ContextCompat.checkSelfPermission(TransposeActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
                         ContextCompat.checkSelfPermission(TransposeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(TransposeActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
+
                 } else {
                     // if permission allowed, call the recording function
                     micRecording();
@@ -60,23 +66,25 @@ public class TransposeActivity extends AppCompatActivity {
                 //stop the recording
                 if (mediaRecorder != null) {
                     try {
+                        micFlag = false;
                         mediaRecorder.stop();
                         mediaRecorder.reset();
                         mediaRecorder.release();
                         mediaRecorder = null;
                         Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
+                        micStatusTextView.setText("Recording ended.");
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         });
 
         //set text to display current note
         String recordedNote = "C#"; //placeholder
-        recordedNoteTextView.setText("Recorded Note: " + recordedNote);
+        recordedNoteTextView.setText("Note Played: " + recordedNote);
     }
-
 
 
     // Microphone recording function
@@ -84,14 +92,14 @@ public class TransposeActivity extends AppCompatActivity {
         // Check if permission is granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Request the permission
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, writeRequest);
             return;
         }
 
         // Get the output directory
         File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         String outputPath = directory.getAbsolutePath() + "/mic_recording.mp4";
-       // Toast.makeText(TransposeActivity.this, "Recording output to: " + outputPath, Toast.LENGTH_LONG).show();
+        // Toast.makeText(TransposeActivity.this, "Recording output to: " + outputPath, Toast.LENGTH_LONG).show();
 
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -100,9 +108,19 @@ public class TransposeActivity extends AppCompatActivity {
         mediaRecorder.setOutputFile(outputPath);
 
         try {
-            mediaRecorder.prepare();
-            mediaRecorder.start();
-            Toast.makeText(TransposeActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
+            if (micFlag == false) {
+                //isRecording = true;
+                mediaRecorder.prepare();
+                mediaRecorder.start();
+                Toast.makeText(TransposeActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
+
+                micStatusTextView.setText("Recording...");
+                //isRecording = true;
+            }
+            micFlag = true;
+            if (micFlag == true) {
+                Toast.makeText(TransposeActivity.this, "Recording...", Toast.LENGTH_SHORT).show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -110,6 +128,11 @@ public class TransposeActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void noteTranslate() throws IOException {
+
     }
 
     // permission handler
@@ -128,4 +151,7 @@ public class TransposeActivity extends AppCompatActivity {
             }
         }
     }
+// end class
 }
+
+

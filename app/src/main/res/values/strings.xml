@@ -12,7 +12,7 @@
     <string name="button">Button</string>
     <string name="detected_music_notes">Detected Music Notes:</string>
     <string name="play">Play</string>
-    <string name="recorded_note">Recorded Note:</string>
+    <string name="recorded_note">Note Played:</string>
     <string name="record">Record</string>
     <string name="stop">STOP</string>
     <string name="todo">TODO</string>
