@@ -1,7 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/grey"
     android:layout_height="match_parent">
 
     <ScrollView
@@ -33,7 +33,6 @@
             <Switch
                 android:id="@+id/switchNotification"
                 android:layout_width="wrap_content"
-                android:contentDescription="Notifications"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -43,7 +42,6 @@
             <CheckBox
                 android:id="@+id/checkBoxDarkMode"
                 android:layout_width="wrap_content"
-                android:contentDescription="Go to dark mode"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -64,7 +62,6 @@
             <EditText
                 android:id="@+id/currentPassword"
                 android:layout_width="match_parent"
-                android:contentDescription="To change passwords, enter current password"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -74,7 +71,6 @@
             <EditText
                 android:id="@+id/newPassword"
                 android:layout_width="match_parent"
-                android:contentDescription="Enter your new password"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -84,7 +80,6 @@
             <EditText
                 android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
-                android:contentDescription="Confirm your new password"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
@@ -103,7 +98,6 @@
 
                 <Button
                     android:id="@+id/changePassword"
-                    android:contentDescription="Click to change your password"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
