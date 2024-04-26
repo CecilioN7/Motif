@@ -40,6 +40,20 @@
             android:layout_marginTop="?attr/actionBarSize"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <ImageView
+        style="@style/LOGO"
+        android:id="@+id/logoImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:transitionName="logo_image"/>
+    <TextView
+        style="@style/TEXT_MAIN"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:fontFamily="@font/bebas_neue"
+        android:text="Welcome to Motif"
+        android:textSize="80sp" />
 
     <com.google.android.material.navigation.NavigationView
         style="@style/SCREEN"
@@ -49,6 +63,5 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/header_menu" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
