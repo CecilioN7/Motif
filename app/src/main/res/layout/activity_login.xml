@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREEN"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
     android:orientation="vertical"
-    android:background="#F5F4F3"
     android:padding="20dp">
 
     <ImageView
+        style="@style/LOGO"
         android:id="@+id/logoImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:transitionName="logo_image"
-        android:src="@drawable/motif_logo_dark"/>
+        android:transitionName="logo_image"/>
 
     <TextView
+        style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bebas_neue"
@@ -25,6 +26,7 @@
         android:transitionName="logo_text" />
 
     <TextView
+        style="@style/TEXT"
         android:id="@+id/slogan_name"
         android:contentDescription="@+id/slogan_name"
         android:layout_width="wrap_content"
@@ -73,6 +75,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            style="@style/BUTTON2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -80,23 +83,22 @@
             android:contentDescription="Forgot password?"
             android:layout_gravity="right"
             android:elevation="0dp"
-            android:textColor="#384042"
             android:layout_margin="5dp"/>
 
         <Button
+            style="@style/BUTTON"
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="SLogin"
             android:layout_margin="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#C6A180"
             android:onClick="attemptLogin"
             android:text="GO"
-            android:textColor="#FFFFFF"
             tools:ignore="TextContrastCheck" />
 
         <Button
+            style="@style/BUTTON2"
             android:id="@+id/signup_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,8 +108,7 @@
             android:elevation="0dp"
             android:contentDescription="Go to Signup"
             android:text="New User? SIGN UP"
-            android:fontFamily="@font/antic"
-            android:textColor="#384042"/>
+            android:fontFamily="@font/antic"/>
 
 
     </LinearLayout>

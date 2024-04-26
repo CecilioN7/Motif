@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,9 +34,9 @@ import java.util.concurrent.Executors;
 
 
 public class Settings extends AppCompatActivity {
-    EditText currentPasswordEditText;
-    EditText newPasswordEditText;
-    EditText confirmPasswordEditText;
+    private TextInputEditText currentPasswordEditText;
+    private TextInputEditText newPasswordEditText;
+    private TextInputEditText confirmPasswordEditText;
     private ExecutorService executor;
     private ExecutorService executor2;
     private Handler handler;
@@ -44,11 +47,12 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
 
-        currentPasswordEditText = findViewById(R.id.currentPassword);
-        newPasswordEditText = findViewById(R.id.newPassword);
-        confirmPasswordEditText = findViewById(R.id.confirmPassword);
+        currentPasswordEditText = findViewById(R.id.currentPasswordInput);
+        newPasswordEditText = findViewById(R.id.newPasswordInput);
+        confirmPasswordEditText = findViewById(R.id.confirmPasswordInput);
         executor = Executors.newSingleThreadExecutor();
         executor2 = Executors.newSingleThreadExecutor();
         handler = new Handler(Looper.getMainLooper());

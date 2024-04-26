@@ -1,16 +1,40 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Motif" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+    <style name="Theme.Motif" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--        &lt;!&ndash; Customize your light theme here. &ndash;&gt;-->
         <item name="colorPrimary">@color/cape_cod</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/sorrell_brown</item>
+<!--         Secondary brand color. -->
+<!--        <item name="colorSecondary">@color/sorrell_brown</item>-->
         <!-- Accent colors. -->
-        <item name="colorAccent">@color/beaver</item>
+<!--        <item name="colorAccent">@color/beaver</item>-->
 
-        <item name="android:windowContentTransitions">true</item>
-
+<!--        <item name="android:windowContentTransitions">true</item>-->
     </style>
 
-    <style name="Theme.Motif" parent="Base.Theme.Motif" />
+    <style name = "LOGO">
+        <item name="android:src">@drawable/motif_logo_dark</item>
+    </style>
+
+    <style name="SCREEN">
+        <item name="android:background">@color/desert_storm</item>
+    </style>
+
+    <style name="TEXT_MAIN">
+        <item name="fontFamily">@font/bebas_neue</item>
+        <item name="android:textColor">@color/cape_cod</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="fontFamily">@font/antic</item>
+        <item name="android:textColor">@color/cape_cod</item>
+    </style>
+
+    <style name="BUTTON">
+        <item name="android:background">@color/cape_cod</item>
+        <item name="android:textColor">@color/desert_storm</item>
+    </style>
+    <style name="BUTTON2">
+        <item name="android:textColor">@color/cape_cod</item>
+        <item name="android:background">@color/desert_storm</item>
+    </style>
 </resources>
