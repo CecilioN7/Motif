@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREENI"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cape_cod"
     android:orientation="vertical"
     android:padding="20dp">
 
     <ImageView
+        style="@style/LOGOI"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher_foreground"
         android:contentDescription="@string/motif_logo"/>
 
 
     <TextView
+        style="@style/TEXT_MAINI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bebas_neue"
         android:text="@string/motif"
-        android:textColor="@color/desert_storm"
         android:textSize="40sp" />
 
     <TextView
+        style="@style/TEXTI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/antic"
         android:text="@string/music"
-        android:textColor="@color/desert_storm"
         android:textSize="18sp" />
 
 </LinearLayout>

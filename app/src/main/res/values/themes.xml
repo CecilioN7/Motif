@@ -11,12 +11,20 @@
 <!--        <item name="android:windowContentTransitions">true</item>-->
     </style>
 
-    <style name = "LOGO">
+    <style name="LOGO">
         <item name="android:src">@drawable/motif_logo_dark</item>
+    </style>
+
+    <style name="LOGOI">
+        <item name="android:src">@drawable/motif_logo</item>
     </style>
 
     <style name="SCREEN">
         <item name="android:background">@color/desert_storm</item>
+    </style>
+
+    <style name = "SCREENI">
+        <item name="android:background">@color/cape_cod</item>
     </style>
 
     <style name="TEXT_MAIN">
@@ -24,9 +32,19 @@
         <item name="android:textColor">@color/cape_cod</item>
     </style>
 
+    <style name="TEXT_MAINI">
+        <item name="fontFamily">@font/bebas_neue</item>
+        <item name="android:textColor">@color/desert_storm</item>
+    </style>
+
     <style name="TEXT">
         <item name="fontFamily">@font/antic</item>
         <item name="android:textColor">@color/cape_cod</item>
+    </style>
+
+    <style name="TEXTI">
+        <item name="fontFamily">@font/antic</item>
+        <item name="android:textColor">@color/desert_storm</item>
     </style>
 
     <style name="BUTTON">
