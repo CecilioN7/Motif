@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:contentDescription="Dashboard"
+    android:contentDescription="@string/dashboard"
     tools:context=".Dashboard"
     android:id="@+id/drawerLayout"
     tools:openDrawer="start" >
@@ -18,7 +18,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Open menu">
+            android:contentDescription="@string/open_menu">
 
             <com.google.android.material.appbar.MaterialToolbar
                 style="@style/SCREENI"
@@ -45,14 +45,15 @@
         android:id="@+id/logoImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:transitionName="logo_image"/>
+        android:transitionName="logo_image"
+        android:contentDescription="@string/todo2" />
     <TextView
         style="@style/TEXT_MAIN"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
         android:fontFamily="@font/bebas_neue"
-        android:text="Welcome to Motif"
+        android:text="@string/welcome_to_motif"
         android:textSize="80sp" />
 
     <com.google.android.material.navigation.NavigationView

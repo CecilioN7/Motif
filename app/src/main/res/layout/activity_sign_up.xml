@@ -13,12 +13,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/motif_logo_dark"
-        android:transitionName="logo_image"/>
+        android:transitionName="logo_image"
+        android:contentDescription="TODO"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome"
+        android:text="@string/welcome"
         android:textSize="40sp"
         android:transitionName="logo_text"
         android:fontFamily="@font/bebas_neue"
@@ -27,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SignUp to start your new musical journey"
+        android:text="@string/signup_to_start_your_new_musical_journey"
         android:textSize="18sp"/>
 
     <LinearLayout
@@ -41,46 +43,49 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Name"
+            android:hint="@string/full_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameInp"
                 android:layout_width="match_parent"
-                android:contentDescription="Enter full name"
+                android:contentDescription="@string/enter_full_name"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="@string/username"
             app:counterMaxLength="15"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameInp"
                 android:layout_width="match_parent"
-                android:contentDescription="Input username"
+                android:contentDescription="@string/input_username"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailInp"
                 android:layout_width="match_parent"
-                android:contentDescription="Input email"
+                android:contentDescription="@string/input_email"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -88,31 +93,33 @@
             android:id="@+id/phoneNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
+            android:hint="@string/phone_number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneInp"
-                android:contentDescription="Input phone number"
+                android:contentDescription="@string/input_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordInp"
                 android:layout_width="match_parent"
-                android:contentDescription="Input password"
+                android:contentDescription="@string/input_password"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -121,17 +128,19 @@
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GO"
-        android:contentDescription="Click to sign up!"
+        android:text="@string/go"
+        android:contentDescription="@string/click_to_sign_up"
         android:background="@color/cape_cod"
-        android:textColor="@color/desert_storm"/>
+        android:textColor="@color/desert_storm"
+        tools:ignore="VisualLintButtonSize" />
     <Button
         android:id="@+id/toLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have an account? LogIn"
-        android:contentDescription="Go to login!"
+        android:text="@string/already_have_an_account_login"
+        android:contentDescription="@string/go_to_login"
         android:background="#00000000"
-        android:textColor="@color/cape_cod"/>
+        android:textColor="@color/cape_cod"
+        tools:ignore="VisualLintButtonSize" />
 
 </LinearLayout>

@@ -14,14 +14,15 @@
         android:id="@+id/logoImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:transitionName="logo_image"/>
+        android:transitionName="logo_image"
+        android:contentDescription="@string/todo3" />
 
     <TextView
         style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bebas_neue"
-        android:text="Hello there, Welcome Back"
+        android:text="@string/hello_there_welcome_back"
         android:textSize="40sp"
         android:transitionName="logo_text" />
 
@@ -32,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/antic"
-        android:text="Sign In to continue"
+        android:text="@string/sign_in_to_continue"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -46,12 +47,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/username"
-            android:hint="Username"
+            android:hint="@string/username"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameInput"
-                android:contentDescription="Input username"
+                android:contentDescription="@string/input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -61,14 +62,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
-                android:contentDescription="Input password"
+                android:contentDescription="@string/input_password"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
 
@@ -79,23 +80,24 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="#00000000"
-            android:text="Forgot Password?"
-            android:contentDescription="Forgot password?"
+            android:text="@string/forgot_password"
+            android:contentDescription="@string/forgott_password"
             android:layout_gravity="right"
             android:elevation="0dp"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="SLogin"
+            android:contentDescription="@string/slogin"
             android:layout_margin="5dp"
             android:layout_marginBottom="5dp"
             android:onClick="attemptLogin"
             android:text="GO"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="HardcodedText,TextContrastCheck" />
 
         <Button
             style="@style/BUTTON2"
@@ -106,9 +108,10 @@
             android:layout_margin="5dp"
             android:background="#00000000"
             android:elevation="0dp"
-            android:contentDescription="Go to Signup"
-            android:text="New User? SIGN UP"
-            android:fontFamily="@font/antic"/>
+            android:contentDescription="@string/go_to_signup"
+            android:text="@string/new_user_sign_up"
+            android:fontFamily="@font/antic"
+            tools:ignore="RtlHardcoded" />
 
 
     </LinearLayout>

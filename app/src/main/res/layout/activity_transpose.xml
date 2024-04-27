@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/RecordButton"
-        android:contentDescription="Record audio"
+        android:contentDescription="@string/record_audio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,7 +38,7 @@
     <Button
         android:id="@+id/StopButton"
         android:layout_width="0dp"
-        android:contentDescription="Stop recording"
+        android:contentDescription="@string/stop_recording"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/stop"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/go_back_to_dashboard"
-        android:contentDescription="Go back to dashboard"
+        android:contentDescription="@string/go_back_to_dashboard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="16dp"

@@ -81,21 +81,18 @@ public class Settings extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        switcher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        switcher.setOnClickListener(view -> {
 
-                if (nightMODE){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor = sharedPreferences.edit();
-                    editor.putBoolean("night", false);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor = sharedPreferences.edit();
-                    editor.putBoolean("night", true);
-                }
-                editor.apply();
+            if (nightMODE){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor = sharedPreferences.edit();
+                editor.putBoolean("night", false);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor = sharedPreferences.edit();
+                editor.putBoolean("night", true);
             }
+            editor.apply();
         });
 
     }
@@ -131,8 +128,8 @@ public class Settings extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("user");
 
-        String newPassHash = "";
-        MessageDigest digest = null;
+        String newPassHash;
+        MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(newPassword.getBytes(StandardCharsets.UTF_8));
