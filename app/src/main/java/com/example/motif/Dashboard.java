@@ -56,8 +56,11 @@ public class Dashboard extends AppCompatActivity {
                     Toast.makeText(Dashboard.this, "Home", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else if (menuItem.getItemId()==R.id.profile) {
-                    Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(Dashboard.this, Login.class);
+                    startActivity(intent);
+                    finish();
+                    //Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
+                    //drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (menuItem.getItemId()==R.id.transpose) {
                     Intent intent = new Intent(Dashboard.this, TransposeActivity.class);
                     startActivity(intent);

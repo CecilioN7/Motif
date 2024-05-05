@@ -59,13 +59,10 @@ public class Login extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordInput);
         Button submitButton = findViewById(R.id.submit);
 		callSignUp = findViewById(R.id.signup_screen);
-		callSignUp.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View view){
-				Intent intent = new Intent(Login.this, SignUp.class);
-				startActivity(intent);
-			}
-		});
+		callSignUp.setOnClickListener(view -> {
+            Intent intent = new Intent(Login.this, SignUp.class);
+            startActivity(intent);
+        });
 
         executor = Executors.newSingleThreadExecutor();
         handler = new Handler(Looper.getMainLooper());
@@ -96,6 +93,7 @@ public class Login extends AppCompatActivity {
                     Intent toDash = new Intent(this, Dashboard.class);
                     toDash.putExtra("user", usernameEditText.getText().toString());
                     startActivity(toDash);
+                    //finish();
                 } else {
                     CharSequence error = "Error login. Check your credentials!";
                     int dur = Toast.LENGTH_SHORT;

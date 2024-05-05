@@ -106,8 +106,8 @@ public class Settings extends AppCompatActivity {
 
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
             if (hex.length() == 1) {
                 hexString.append('0');
             }
@@ -219,11 +219,7 @@ public class Settings extends AppCompatActivity {
             Log.d("Hashed current pass", hash);
             Log.d("Database pass:", dbPass);
 
-            if (dbPass.equals(hash)) {
-                return true;
-            } else {
-                return false;
-            }
+            return dbPass.equals(hash);
             //Log.d("returnedPass:", returnedPass);
         } catch (IOException e) { //| JSONException
             e.printStackTrace();
@@ -299,10 +295,7 @@ public class Settings extends AppCompatActivity {
             result = responseOutput.toString();
             Log.d("Result::", result);
 
-            if (result.equals("{\"Result\":true}")) {
-                return true;
-            }
-            return false;
+            return result.equals("{\"Result\":true}");
 
         } catch (IOException e) { //| JSONException
             e.printStackTrace();
