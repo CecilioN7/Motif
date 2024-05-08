@@ -4,7 +4,6 @@
 <!--        &lt;!&ndash; Customize your dark theme here. &ndash;&gt;-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
         <item name="colorPrimary">@color/desert_storm</item>
         <!--dark mode-->
         </style>

@@ -21,7 +21,6 @@
         style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bebas_neue"
         android:text="@string/hello_there_welcome_back"
         android:textSize="40sp"
         android:transitionName="logo_text" />
@@ -32,7 +31,6 @@
         android:contentDescription="@+id/slogan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/antic"
         android:text="@string/sign_in_to_continue"
         android:textSize="18sp" />
 

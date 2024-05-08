@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREEN"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUp"
     android:orientation="vertical"
-    android:background="@color/desert_storm"
     android:padding="20dp">
 
     <ImageView
+        style="@style/LOGO"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/motif_logo_dark"
         android:transitionName="logo_image"
         android:contentDescription="TODO"
         tools:ignore="HardcodedText" />
 
     <TextView
+        style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome"
         android:textSize="40sp"
         android:transitionName="logo_text"
-        android:fontFamily="@font/bebas_neue"
         android:layout_marginTop="-20dp"/>
 
     <TextView
+        style="@style/TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signup_to_start_your_new_musical_journey"
@@ -125,22 +126,21 @@
     </LinearLayout>
 
     <Button
+        style="@style/BUTTON"
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/go"
         android:contentDescription="@string/click_to_sign_up"
-        android:background="@color/cape_cod"
-        android:textColor="@color/desert_storm"
         tools:ignore="VisualLintButtonSize" />
     <Button
+        style="@style/BUTTON2"
         android:id="@+id/toLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/already_have_an_account_login"
         android:contentDescription="@string/go_to_login"
         android:background="#00000000"
-        android:textColor="@color/cape_cod"
         tools:ignore="VisualLintButtonSize" />
 
 </LinearLayout>

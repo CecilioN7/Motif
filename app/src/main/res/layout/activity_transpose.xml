@@ -7,7 +7,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:paddingTop="@dimen/activity_vertical_margin"
+    style="@style/SCREEN">
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,6 +22,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        style="@style/BUTTON"
         android:id="@+id/RecordButton"
         android:contentDescription="@string/record_audio"
         android:layout_width="0dp"
@@ -36,6 +38,7 @@
         tools:ignore="VisualLintButtonSize" />
 
     <Button
+        style="@style/BUTTON"
         android:id="@+id/StopButton"
         android:layout_width="0dp"
         android:contentDescription="@string/stop_recording"
@@ -48,6 +51,7 @@
         app:layout_constraintWidth_percent="0.25"
         tools:ignore="VisualLintButtonSize" />
     <Button
+        style="@style/BUTTON"
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,17 +64,18 @@
 
 
     <TextView
+        style="@style/TEXT_MAIN"
         android:id="@+id/NoteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="48sp"
-        android:fontFamily="@font/bebas_neue"
         app:layout_constraintEnd_toEndOf="@id/RecordButton"
         app:layout_constraintStart_toStartOf="@id/RecordButton"
         app:layout_constraintTop_toTopOf="@id/RecordButton"
         android:layout_marginTop="-182dp"/>
     <TextView
+        style="@style/TEXT"
         android:id="@+id/StatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
