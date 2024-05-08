@@ -1,27 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/SCREEN"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:contentDescription="@string/dashboard"
-    tools:context=".Dashboard"
-    android:id="@+id/drawerLayout"
-    tools:openDrawer="start" >
+    tools:context=".Dashboard">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/open_menu">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
-                style="@style/SCREENI"
                 android:id="@+id/materialToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,35 +23,74 @@
                 app:navigationIcon="@drawable/baseline_menu_24"
                 app:title="Motif"
                 app:titleTextColor="@color/desert_storm" />
-
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            style="@style/SCREEN"
-            android:id="@+id/frameLayout"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"/>
+            android:padding="20dp"
+            android:layout_gravity="center">
 
+            <EditText
+                android:paddingTop="50dp"
+                android:id="@+id/noteInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter notes (e.g., A B C)"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:scrollbars="vertical" />
+
+            <EditText
+                android:id="@+id/transposeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Transpose by (e.g., 1, -1)"
+                android:inputType="numberSigned" />
+
+            <RadioGroup
+                android:id="@+id/accidentalGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/sharpButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sharp" />
+
+                <RadioButton
+                    android:id="@+id/flatButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Flat" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/transposeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transpose" />
+
+            <TextView
+                android:id="@+id/resultView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="" />
+
+            <!-- Button to copy the output to clipboard -->
+            <Button
+                android:id="@+id/copyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Copy to Clipboard" />
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <ImageView
-        style="@style/LOGO"
-        android:id="@+id/logoImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:transitionName="logo_image"
-        android:contentDescription="@string/todo2" />
-    <TextView
-        style="@style/TEXT_MAIN"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:fontFamily="@font/bebas_neue"
-        android:text="@string/welcome_to_motif"
-        android:textSize="80sp" />
 
     <com.google.android.material.navigation.NavigationView
-        style="@style/SCREEN"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -66,3 +99,175 @@
         app:menu="@menu/header_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
+
+    <!--<androidx.drawerlayout.widget.DrawerLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/drawerLayout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".Dashboard">-->
+
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        &lt;!&ndash; AppBar containing the toolbar &ndash;&gt;-->
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <com.google.android.material.appbar.MaterialToolbar-->
+<!--                android:id="@+id/materialToolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:menu="@menu/nav_menu"-->
+<!--                app:navigationIcon="@drawable/baseline_menu_24"-->
+<!--                app:title="Motif"-->
+<!--                app:titleTextColor="@color/desert_storm" />-->
+
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--        &lt;!&ndash; LinearLayout containing the input sections &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:padding="20dp"-->
+<!--            android:layout_gravity="center">-->
+
+<!--            &lt;!&ndash; EditText for entering notes &ndash;&gt;-->
+<!--            <EditText-->
+<!--                android:paddingTop="50dp"-->
+<!--                android:id="@+id/noteInput"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Enter notes (e.g., A B C)"-->
+<!--                android:inputType="text" />-->
+
+<!--            &lt;!&ndash; EditText for specifying the transposition value &ndash;&gt;-->
+<!--            <EditText-->
+<!--                android:id="@+id/transposeInput"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Transpose by (e.g., 1, -1)"-->
+<!--                android:inputType="numberSigned" />-->
+
+<!--            &lt;!&ndash; RadioGroup to choose between sharp or flat &ndash;&gt;-->
+<!--            <RadioGroup-->
+<!--                android:id="@+id/accidentalGroup"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/sharpButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Sharp" />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/flatButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Flat" />-->
+<!--            </RadioGroup>-->
+
+<!--            &lt;!&ndash; Button to initiate the transposition &ndash;&gt;-->
+<!--            <Button-->
+<!--                android:id="@+id/transposeButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Transpose" />-->
+
+<!--            &lt;!&ndash; TextView to display the result &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/resultView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingTop="16dp"-->
+<!--                android:text="" />-->
+
+<!--        </LinearLayout>-->
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+<!--    &lt;!&ndash; Navigation Drawer &ndash;&gt;-->
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigationView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        app:menu="@menu/header_menu" />-->
+
+<!--</androidx.drawerlayout.widget.DrawerLayout>-->
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    style="@style/SCREEN"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:contentDescription="@string/dashboard"-->
+<!--    tools:context=".Dashboard"-->
+<!--    android:id="@+id/drawerLayout"-->
+<!--    tools:openDrawer="start" >-->
+
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
+
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:contentDescription="@string/open_menu">-->
+
+<!--            <com.google.android.material.appbar.MaterialToolbar-->
+<!--                style="@style/SCREENI"-->
+<!--                android:id="@+id/materialToolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:menu="@menu/nav_menu"-->
+<!--                app:navigationIcon="@drawable/baseline_menu_24"-->
+<!--                app:title="Motif"-->
+<!--                app:titleTextColor="@color/desert_storm" />-->
+
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--        <FrameLayout-->
+<!--            style="@style/SCREEN"-->
+<!--            android:id="@+id/frameLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="?attr/actionBarSize"/>-->
+
+<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+<!--    <ImageView-->
+<!--        style="@style/LOGO"-->
+<!--        android:id="@+id/logoImage"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:transitionName="logo_image"-->
+<!--        android:contentDescription="@string/todo2" />-->
+<!--    <TextView-->
+<!--        style="@style/TEXT_MAIN"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="bottom"-->
+<!--        android:fontFamily="@font/bebas_neue"-->
+<!--        android:text="@string/welcome_to_motif"-->
+<!--        android:textSize="80sp" />-->
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        style="@style/SCREEN"-->
+<!--        android:id="@+id/navigationView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        app:menu="@menu/header_menu" />-->
+
+<!--</androidx.drawerlayout.widget.DrawerLayout>-->
