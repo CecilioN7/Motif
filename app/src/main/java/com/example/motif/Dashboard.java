@@ -89,7 +89,7 @@ public class Dashboard extends AppCompatActivity {
                     //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
                     //drawerLayout.closeDrawer(GravityCompat.START);
                 }else if (menuItem.getItemId()==R.id.notepad) {
-                    Intent intent = new Intent(Dashboard.this, Notepad.class);
+                    Intent intent = new Intent(Dashboard.this, NotepadList.class);
                     intent.putExtra("user", getIntent().getStringExtra("user"));
 
                     startActivity(intent);

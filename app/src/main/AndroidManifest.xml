@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Motif"
         tools:targetApi="31">
         <activity
+            android:name=".NotepadList"
+            android:exported="false" />
+        <activity
             android:name=".Notepad"
             android:exported="false" />
         <activity

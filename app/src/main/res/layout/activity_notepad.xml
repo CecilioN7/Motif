@@ -5,6 +5,54 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    style="@style/SCREEN"
     tools:context=".Notepad">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/notepad"
+        android:hint="Write your note here..."
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/noteInput"
+            android:contentDescription="notepad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|start"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        style="@style/BUTTON"
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_margin="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<EditText-->
+<!--android:id="@+id/noteInput"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="0dp"-->
+<!--android:hint="Write your note here..."-->
+<!--android:gravity="start"-->
+<!--android:inputType="textMultiLine"-->
+<!--android:padding="16dp"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="parent"-->
+<!--app:layout_constraintBottom_toTopOf="@+id/saveButton" />-->
