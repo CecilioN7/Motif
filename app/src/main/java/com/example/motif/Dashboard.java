@@ -88,6 +88,13 @@ public class Dashboard extends AppCompatActivity {
                     startActivity(intent);
                     //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
                     //drawerLayout.closeDrawer(GravityCompat.START);
+                }else if (menuItem.getItemId()==R.id.notepad) {
+                    Intent intent = new Intent(Dashboard.this, Notepad.class);
+                    intent.putExtra("user", getIntent().getStringExtra("user"));
+
+                    startActivity(intent);
+                    //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                    //drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 return false;
             }
