@@ -6,9 +6,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,9 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.util.Random;
 
@@ -37,21 +33,23 @@ public class TunerActivity extends AppCompatActivity {
     Button buttonStart, buttonStop; // Add reference to button
     TextView recordedNoteTextView; // Add reference to the TextView
     TextView micStatusTextView;
+    TextView samplerateview;
     String AudioSavePathInDevice = null;
 
     Random random;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
     MediaPlayer mediaPlayer;
-    int samplerate = 0; // Standard Hz sample rate
+    int sampleRate = 0; // Standard Hz sample rate
     int channel = 0;
     int format = 0;
     int buffer = 0;
+    byte[] buffersize;
     short[] audiobuffer = new short[buffer / 2];
     AudioRecord record;
     Thread thread;
     int fnum = 0;
-
+    int bytesRead = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +60,7 @@ public class TunerActivity extends AppCompatActivity {
         buttonStop = findViewById(R.id.StopButton);
         recordedNoteTextView = findViewById(R.id.NoteTextView);
         micStatusTextView = findViewById(R.id.StatusTextView);
-
+        samplerateview = findViewById(R.id.rateTextView);
 
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,10 +128,10 @@ public class TunerActivity extends AppCompatActivity {
         }
 
 
-        int sampleRate = 44100;
-        int channel = AudioFormat.CHANNEL_IN_MONO;
-        int format = AudioFormat.ENCODING_PCM_16BIT;
-        int buffer = AudioRecord.getMinBufferSize(sampleRate, channel, format);
+        sampleRate = 44100;
+        channel = AudioFormat.CHANNEL_IN_MONO;
+        format = AudioFormat.ENCODING_PCM_16BIT;
+        buffer = AudioRecord.getMinBufferSize(sampleRate, channel, format);
         record = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, channel, format, buffer);
 
 
@@ -172,10 +170,10 @@ public class TunerActivity extends AppCompatActivity {
                 String randomNote = notes[randnum.nextInt(notes.length)];
 
                 recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
-
                 try {
                     if (micFlag) {
                         noteThread();
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -187,67 +185,92 @@ public class TunerActivity extends AppCompatActivity {
         //--------------------------------------------------------------------------------------------------
 
         thread = new Thread(new Runnable() {
+
             @Override
             public void run() {
                 while (micFlag) {
 
-                    byte[] buffersize = new byte[buffer];//data from audio
+                    buffersize = new byte[buffer];//data from audio
 
                     //int bytesRead = record.read(buffer, 0, buffersize);
-                    int bytesRead = record.read(buffersize, 0, buffer);
-                    if (bytesRead > 0) {
-                        // function call to translation function
-                        noteTranslate(buffer, bytesRead);
-                    }
+                    bytesRead = record.read(buffersize, 0, buffer);
+                  //  if (bytesRead > 0) {
+                   //     // function call to translation function
+                    //    noteTranslate(buffer, bytesRead);
+                  // }
                 }
             }
         });
         thread.start();
+        //if (bytesRead > 0) {
+            //     // function call to translation function
+                noteTranslate(buffer, bytesRead);
+          //   }
     }
 
     public void noteTranslate(int x, int y) {
-        int listIndex = 0;
+        //int listIndex = 0;
         // double frequency = calculateFrequency(audioBuffer, bufferSize);
-        double frequency = 320.0;// test frequency
-        //String[] list = new String[2000];
-        String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
 
-        String fileName = fnum + ".txt";
-        fnum = fnum + 1;
+        //double frequency = 320.0;// test frequency
+        int frequency = calculateFrequency(sampleRate, audiobuffer);
+        //String[] list = new String[2000];
+        //String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
+        //samplerateview.setText("in notes translate");
+       // String fileName = fnum + ".txt";
+        //fnum = fnum + 1;
         String note = noteFrequency(frequency);// pass the frequency recorded
+        samplerateview.setText(note);//left off here, run
+       // samplerateview.setText(" ");
         //--------------------------------------------------------------------------
 
-        while (listIndex < list.length && list[listIndex] != null) {
-            listIndex++;
-        }
+       // while (listIndex < list.length && list[listIndex] != null) {
+          //  listIndex++;
+       // }
 
-        if (listIndex == list.length) {
-            System.err.println("Warning: list array is full. Unable to add more notes.");
-            return;
-        }
+      //  if (listIndex == list.length) {
+          //  System.err.println("Warning: list array is full. Unable to add more notes.");
+          //  return;
+       // }
 
-        list[listIndex] = note;
+       // list[listIndex] = note;
         //-------------------------------------------------------------------------
-        try {
-            FileWriter fwrite = new FileWriter(fileName);
-            BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
+       // try {
+          //  FileWriter fwrite = new FileWriter(fileName);
+          //  BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
 
 
-            for (int i = 0; i < list.length; i++) {
-                bufferedWriter.write(list[i]);
-                bufferedWriter.write(' ');
-            }
+          //  for (int i = 0; i < list.length; i++) {
+           //     bufferedWriter.write(list[i]);
+           //     bufferedWriter.write(' ');
+         //   }
 
 
-            bufferedWriter.close();// end write
-            System.out.println("File writing is done.");
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
+          //  bufferedWriter.close();// end write
+          //  System.out.println("File writing is done.");
+      //  } catch (IOException e) {
+        //    System.err.println("Error writing to file: " + e.getMessage());
+      //  }
         thread.interrupt();//end tread once done;
     }
+    public static int calculateFrequency(int hz, short [] data){
+        int count = 0;
+        int audiodata = data.length;
 
+        for (int i = 0; i < audiodata-1; i++)
+        {
+            if ((data[i] > 0 && data[i + 1] <= 0) || (data[i] < 0 && data[i + 1] >= 0))
+            {
+                count = count + 1;
+            }
+        }
+        float rate= count / 2;
+        float time1 = (float)audiodata / (float)hz;
+        float frequency = rate/time1;
+        return (int)frequency;
+    }
     public String noteFrequency(double frequency) {
+
         if (frequency >= 261.63 && frequency < 293.66) {
             return "C";
         } else if (frequency >= 293.66 && frequency < 311.13) {

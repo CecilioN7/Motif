@@ -76,6 +76,18 @@
         app:layout_constraintStart_toStartOf="@id/RecordButton"
         app:layout_constraintTop_toTopOf="@id/RecordButton"
         android:layout_marginTop="-182dp"/>
+
+    <TextView
+        style="@style/TEXT_MAIN"
+        android:id="@+id/rateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Frequency"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="@id/RecordButton"
+        app:layout_constraintStart_toStartOf="@id/RecordButton"
+        app:layout_constraintTop_toTopOf="@id/RecordButton"
+        android:layout_marginTop="-222dp"/>
     <TextView
         style="@style/TEXT"
         android:id="@+id/StatusTextView"
