@@ -52,52 +52,46 @@ public class Dashboard extends AppCompatActivity {
                 Dashboard.this, drawerLayout, materialToolbar, R.string.drawer_close, R.string.drawer_open);
         drawerLayout.addDrawerListener(toggle);
 
-        materialToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        materialToolbar.setOnMenuItemClickListener(item -> {
 
-                if (item.getItemId()==R.id.share){
-                    Toast.makeText(Dashboard.this, "share", Toast.LENGTH_SHORT).show();
+            if (item.getItemId()==R.id.share){
+                Toast.makeText(Dashboard.this, "share", Toast.LENGTH_SHORT).show();
 
-                }
-                return false;
             }
+            return false;
         });
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId()==R.id.home){
-                    Toast.makeText(Dashboard.this, "Home", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                } else if (menuItem.getItemId()==R.id.profile) {
-                    Intent intent = new Intent(Dashboard.this, Login.class);
-                    startActivity(intent);
-                    finish();
-                    //Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
-                    //drawerLayout.closeDrawer(GravityCompat.START);
-                }else if (menuItem.getItemId()==R.id.transpose) {
-                    Intent intent = new Intent(Dashboard.this, TransposeActivity.class);
-                    startActivity(intent);
-                    //Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
-                    //drawerLayout.closeDrawer(GravityCompat.START);
-                }else if (menuItem.getItemId()==R.id.settings) {
-                    Intent intent = new Intent(Dashboard.this, Settings.class);
-                    intent.putExtra("user", getIntent().getStringExtra("user"));
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            if(menuItem.getItemId()==R.id.home){
+                Toast.makeText(Dashboard.this, "Home", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else if (menuItem.getItemId()==R.id.profile) {
+                Intent intent = new Intent(Dashboard.this, Login.class);
+                startActivity(intent);
+                finish();
+                //Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
+            }else if (menuItem.getItemId()==R.id.transpose) {
+                Intent intent = new Intent(Dashboard.this, TransposeActivity.class);
+                startActivity(intent);
+                //Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
+            }else if (menuItem.getItemId()==R.id.settings) {
+                Intent intent = new Intent(Dashboard.this, Settings.class);
+                intent.putExtra("user", getIntent().getStringExtra("user"));
 
-                    startActivity(intent);
-                    //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
-                    //drawerLayout.closeDrawer(GravityCompat.START);
-                }else if (menuItem.getItemId()==R.id.notepad) {
-                    Intent intent = new Intent(Dashboard.this, NotepadList.class);
-                    intent.putExtra("user", getIntent().getStringExtra("user"));
+                startActivity(intent);
+                //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
+            }else if (menuItem.getItemId()==R.id.notepad) {
+                Intent intent = new Intent(Dashboard.this, NotepadList.class);
+                intent.putExtra("user", getIntent().getStringExtra("user"));
 
-                    startActivity(intent);
-                    //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
-                    //drawerLayout.closeDrawer(GravityCompat.START);
-                }
-                return false;
+                startActivity(intent);
+                //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
             }
+            return false;
         });
         // Find views
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -110,20 +104,10 @@ public class Dashboard extends AppCompatActivity {
         Button transposeButton = findViewById(R.id.transposeButton);
         Button copyButton = findViewById(R.id.copyButton);
         // Transpose button click handler
-        transposeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                transposeNotes();
-            }
-        });
+        transposeButton.setOnClickListener(v -> transposeNotes());
 
         // Copy to Clipboard button click handler
-        copyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copyToClipboard();
-            }
-        });
+        copyButton.setOnClickListener(v -> copyToClipboard());
     }
     // Transpose notes logic
     private void transposeNotes() {

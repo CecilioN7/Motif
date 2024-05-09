@@ -43,19 +43,16 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(bottomAnim);
         slogan.setAnimation(bottomAnim);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(MainActivity.this, Login.class);
 
-                Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(image, "logo_image");
-                pairs[1] = new Pair<View, String>(logo, "logo_text");
+            Pair[] pairs = new Pair[2];
+            pairs[0] = new Pair<View, String>(image, "logo_image");
+            pairs[1] = new Pair<View, String>(logo, "logo_text");
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
-                startActivity(intent, options.toBundle());
-                finish();
-            }
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+            startActivity(intent, options.toBundle());
+            finish();
         }, SPLASH_SCREEN);
     }
 }

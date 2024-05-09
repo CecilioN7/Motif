@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/notepad"
-        android:hint="Write your note here..."
+        android:hint="@string/write_your_note_here"
         android:gravity="start"
         android:inputType="textMultiLine"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -25,10 +25,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/noteInput"
-            android:contentDescription="notepad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="top|start"/>
+            android:contentDescription="@string/notepad"
+            android:gravity="top|start"
+            android:textColorHint="#546E7A" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,11 +38,12 @@
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:layout_margin="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="VisualLintButtonSize" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--<EditText-->

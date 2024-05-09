@@ -37,21 +37,19 @@ public class NotepadList extends AppCompatActivity {
 
         // New Note Button
         Button newNoteButton = findViewById(R.id.newNoteButton);
-        newNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to the Notepad activity for creating a new note
-                Intent intent = new Intent(NotepadList.this, Notepad.class);
-                startActivity(intent);
-            }
+        newNoteButton.setOnClickListener(v -> {
+            // Navigate to the Notepad activity for creating a new note
+            Intent intent = new Intent(NotepadList.this, Notepad.class);
+            startActivity(intent);
         });
     }
 
     // Override the back button behavior to return to the Dashboard activity
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent intent = new Intent(NotepadList.this, Dashboard.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

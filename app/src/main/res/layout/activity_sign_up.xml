@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:transitionName="logo_image"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/motif"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -50,9 +50,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameInp"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/enter_full_name"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/enter_full_name"
                 android:inputType="text"
+                android:textColorHint="#546E7A"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,9 +68,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameInp"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/input_username"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/input_username"
                 android:inputType="text"
+                android:textColorHint="#546E7A"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,9 +85,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailInp"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/input_email"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:textColorHint="#546E7A"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,10 +101,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneInp"
-                android:contentDescription="@string/input_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/input_phone_number"
                 android:inputType="number"
+                android:textColorHint="#546E7A"
                 tools:ignore="VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,22 +120,21 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordInp"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/input_password"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                tools:ignore="VisualLintTextFieldSize" />
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
     <Button
-        style="@style/BUTTON"
         android:id="@+id/register"
+        style="@style/BUTTON"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go"
         android:contentDescription="@string/click_to_sign_up"
-        tools:ignore="VisualLintButtonSize" />
+        android:text="@string/go"
+        tools:ignore="VisualLintButtonSize,RedundantDescriptionCheck" />
     <Button
         style="@style/BUTTON2"
         android:id="@+id/toLogin"

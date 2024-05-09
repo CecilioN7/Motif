@@ -30,7 +30,7 @@ public class TransposeActivity extends AppCompatActivity {
 
     private static final int writeRequest = 1;
     private boolean micFlag = false;
-    private Handler noteHandler = new Handler(); //test noteTranslate
+    private final Handler noteHandler = new Handler(); //test noteTranslate
     private Random randnum = new Random(); //test noteTranslate
     MediaRecorder mediaRecorder; //For mic recording
     Button buttonStart, buttonStop; // Add reference to button
@@ -173,7 +173,7 @@ public class TransposeActivity extends AppCompatActivity {
                     recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
 
                     try {
-                        if (micFlag == true) {
+                        if (micFlag) {
                             noteThread();
                         }
                     } catch (IOException e) {

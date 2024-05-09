@@ -14,7 +14,7 @@
         style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your notes"
+        android:text="@string/your_notes"
         android:textSize="40sp"
         android:transitionName="logo_text"
         tools:layout_editor_absoluteX="20dp"
@@ -36,9 +36,10 @@
         android:id="@+id/newNoteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Note"
+        android:text="@string/new_note"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        tools:ignore="VisualLintButtonSize" />
 </androidx.constraintlayout.widget.ConstraintLayout>

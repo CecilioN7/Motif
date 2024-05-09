@@ -137,11 +137,7 @@ public class SignUp extends AppCompatActivity {
                 }
             }
             result = responseOutput.toString();
-            if (result.equals("[]")) {
-                return false; //Returns false if user does not exist
-            } else {
-                return true;
-            }
+            return !result.equals("[]"); //Returns false if user does not exist
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
