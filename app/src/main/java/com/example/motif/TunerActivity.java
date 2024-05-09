@@ -6,6 +6,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -43,13 +44,14 @@ public class TunerActivity extends AppCompatActivity {
     public static final int RequestPermissionCode = 1;
     MediaPlayer mediaPlayer;
     int samplerate = 0; // Standard Hz sample rate
-    int channel =0;
+    int channel = 0;
     int format = 0;
-    int buffer = 0 ;
+    int buffer = 0;
     short[] audiobuffer = new short[buffer / 2];
     AudioRecord record;
     Thread thread;
     int fnum = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +72,14 @@ public class TunerActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(TunerActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
 
                 } else {
+                    try {
+                        micRecording();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(TunerActivity.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                     // if permission allowed, call the recording function
-                    micRecording();
+                    //  micRecording();
                 }
             }
         });
@@ -80,13 +88,18 @@ public class TunerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //stop the recording
-                if (mediaRecorder != null) {
+                if (record != null) {
                     try {
                         micFlag = false;
-                        mediaRecorder.stop();
-                        mediaRecorder.reset();
-                        mediaRecorder.release();
-                        mediaRecorder = null;
+                        record.stop();
+                        //  mediaRecorder.reset();
+                        record.release();
+
+                        //   mediaRecorder.release();
+                        //    mediaRecorder.reset();
+                        //   mediaRecorder.release();
+                        record = null;
+                        //    mediaRecorder = null;
                         recordedNoteTextView.setText("");
                         Toast.makeText(TunerActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                         micStatusTextView.setText("Recording ended.");
@@ -105,54 +118,42 @@ public class TunerActivity extends AppCompatActivity {
 
 
     // Microphone recording function
-    private void micRecording() {
-        // Check if permission is granted
+    private void micRecording() throws IOException {
+        // Check if permission is granted and request the permission for mic and file access
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // Request the permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, writeRequest);
             return;
         }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, RequestPermissionCode);
+            return;
+        }
 
-        // Get the output directory
-        File directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        String outputPath = directory.getAbsolutePath() + "/mic_recording.mp4";
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        mediaRecorder.setOutputFile(outputPath);
 
-        //Set up audio analysis parameters
-        samplerate = 44100; // Standard Hz sample rate, 44000
-        channel = AudioFormat.CHANNEL_IN_MONO;
-        format = AudioFormat.ENCODING_PCM_16BIT;
-        buffer = 4 * AudioRecord.getMinBufferSize(samplerate, channel, format);
+        int sampleRate = 44100;
+        int channel = AudioFormat.CHANNEL_IN_MONO;
+        int format = AudioFormat.ENCODING_PCM_16BIT;
+        int buffer = AudioRecord.getMinBufferSize(sampleRate, channel, format);
+        record = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, channel, format, buffer);
 
-        audiobuffer = new short[buffer / 2];
-        record = new AudioRecord(MediaRecorder.AudioSource.MIC, samplerate, channel, format, buffer);
+
+        if (record.getState() != AudioRecord.STATE_INITIALIZED) {
+            Toast.makeText(this, "Failed to initialize AudioRecord", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         try {
-            if (micFlag == false) {
-                //isRecording = true;
-                mediaRecorder.prepare();
-                mediaRecorder.start();
-                Toast.makeText(TunerActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
-
-                micStatusTextView.setText("Recording...");
-                //isRecording = true;
-                noteThread(); //while recording, call notesTranslate to indentify notes;
-            }
+            record.startRecording();
+            micStatusTextView.setText("Recording...");
             micFlag = true;
-            if (micFlag == true) {
-                Toast.makeText(TunerActivity.this, "Recording...", Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
+            Toast.makeText(this, "Recording started", Toast.LENGTH_SHORT).show();
+
+            // Start thread for audio processing
+            noteThread();
+        } catch (IllegalStateException e) {
             e.printStackTrace();
-            Toast.makeText(TunerActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            Toast.makeText(TunerActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -166,21 +167,21 @@ public class TunerActivity extends AppCompatActivity {
 
             public void run() {
 
-               // while (micFlag == true) {
-                    String[] notes = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
-                    String randomNote = notes[randnum.nextInt(notes.length)];
+                // while (micFlag == true) {
+                String[] notes = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
+                String randomNote = notes[randnum.nextInt(notes.length)];
 
-                    recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
+                recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
 
-                    try {
-                        if (micFlag) {
-                            noteThread();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    if (micFlag) {
+                        noteThread();
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-          //  }
+            }
+            //  }
         }, 2000);
 
         //--------------------------------------------------------------------------------------------------
@@ -193,7 +194,7 @@ public class TunerActivity extends AppCompatActivity {
                     byte[] buffersize = new byte[buffer];//data from audio
 
                     //int bytesRead = record.read(buffer, 0, buffersize);
-                    int bytesRead = record.read(buffersize,0,buffer);
+                    int bytesRead = record.read(buffersize, 0, buffer);
                     if (bytesRead > 0) {
                         // function call to translation function
                         noteTranslate(buffer, bytesRead);
@@ -204,47 +205,47 @@ public class TunerActivity extends AppCompatActivity {
         thread.start();
     }
 
-        public void noteTranslate(int x ,int y){
-            int listIndex = 0;
-            // double frequency = calculateFrequency(audioBuffer, bufferSize);
-            double frequency = 320.0;// test frequency
-            //String[] list = new String[2000];
-            String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
+    public void noteTranslate(int x, int y) {
+        int listIndex = 0;
+        // double frequency = calculateFrequency(audioBuffer, bufferSize);
+        double frequency = 320.0;// test frequency
+        //String[] list = new String[2000];
+        String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
 
-            String fileName = fnum + ".txt";
-            fnum = fnum + 1;
-            String note = noteFrequency(frequency);// pass the frequency recorded
-            //--------------------------------------------------------------------------
+        String fileName = fnum + ".txt";
+        fnum = fnum + 1;
+        String note = noteFrequency(frequency);// pass the frequency recorded
+        //--------------------------------------------------------------------------
 
-            while (listIndex < list.length && list[listIndex] != null) {
-                listIndex++;
-            }
-
-            if (listIndex == list.length) {
-                System.err.println("Warning: list array is full. Unable to add more notes.");
-                return;
-            }
-
-            list[listIndex] = note;
-            //-------------------------------------------------------------------------
-            try {
-                FileWriter fwrite = new FileWriter(fileName);
-                BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
-
-
-                for (int i = 0; i < list.length; i++) {
-                    bufferedWriter.write(list[i]);
-                    bufferedWriter.write(' ');
-                }
-
-
-                bufferedWriter.close();// end write
-                System.out.println("File writing is done.");
-            } catch (IOException e) {
-                System.err.println("Error writing to file: " + e.getMessage());
-            }
-        thread.interrupt();//end tread once done;
+        while (listIndex < list.length && list[listIndex] != null) {
+            listIndex++;
         }
+
+        if (listIndex == list.length) {
+            System.err.println("Warning: list array is full. Unable to add more notes.");
+            return;
+        }
+
+        list[listIndex] = note;
+        //-------------------------------------------------------------------------
+        try {
+            FileWriter fwrite = new FileWriter(fileName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
+
+
+            for (int i = 0; i < list.length; i++) {
+                bufferedWriter.write(list[i]);
+                bufferedWriter.write(' ');
+            }
+
+
+            bufferedWriter.close();// end write
+            System.out.println("File writing is done.");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+        thread.interrupt();//end tread once done;
+    }
 
     public String noteFrequency(double frequency) {
         if (frequency >= 261.63 && frequency < 293.66) {
@@ -276,6 +277,7 @@ public class TunerActivity extends AppCompatActivity {
         // If the frequency doesn't match any note, return an empty string or null
         return "";
     }
+
     // permission handler
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
@@ -285,7 +287,13 @@ public class TunerActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                     grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
-                micRecording();
+                // micRecording();
+                try {
+                    micRecording();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(TunerActivity.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             } else {
                 // Permission denied
                 Toast.makeText(this, "Permission denied.", Toast.LENGTH_SHORT).show();
