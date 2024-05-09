@@ -1,9 +1,7 @@
 package com.example.motif;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -12,10 +10,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -72,7 +68,7 @@ public class Dashboard extends AppCompatActivity {
                 //Toast.makeText(Dashboard.this, "Logout", Toast.LENGTH_SHORT).show();
                 //drawerLayout.closeDrawer(GravityCompat.START);
             }else if (menuItem.getItemId()==R.id.transpose) {
-                Intent intent = new Intent(Dashboard.this, TransposeActivity.class);
+                Intent intent = new Intent(Dashboard.this, TunerActivity.class);
                 startActivity(intent);
                 //Toast.makeText(Dashboard.this, "Transpose", Toast.LENGTH_SHORT).show();
                 //drawerLayout.closeDrawer(GravityCompat.START);

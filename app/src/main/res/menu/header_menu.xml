@@ -21,7 +21,7 @@
         >
         <item
             android:id="@+id/transpose"
-            android:title="@string/transpose"
+            android:title="Tuner"
             android:icon="@drawable/baseline_audiotrack_24"
             />
         <item

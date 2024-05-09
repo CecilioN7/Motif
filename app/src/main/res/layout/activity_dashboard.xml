@@ -64,6 +64,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+
+
                     android:id="@+id/transposeInput"
                     android:contentDescription="@string/input_username"
                     android:layout_width="match_parent"

@@ -26,7 +26,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-public class TransposeActivity extends AppCompatActivity {
+public class TunerActivity extends AppCompatActivity {
 
     private static final int writeRequest = 1;
     private boolean micFlag = false;
@@ -54,7 +54,7 @@ public class TransposeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_transpose);
+        setContentView(R.layout.activity_tuner);
 
         buttonStart = findViewById(R.id.RecordButton);
         buttonStop = findViewById(R.id.StopButton);
@@ -65,9 +65,9 @@ public class TransposeActivity extends AppCompatActivity {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(TransposeActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
-                        ContextCompat.checkSelfPermission(TransposeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(TransposeActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
+                if (ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
+                        ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(TunerActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
 
                 } else {
                     // if permission allowed, call the recording function
@@ -88,7 +88,7 @@ public class TransposeActivity extends AppCompatActivity {
                         mediaRecorder.release();
                         mediaRecorder = null;
                         recordedNoteTextView.setText("");
-                        Toast.makeText(TransposeActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TunerActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                         micStatusTextView.setText("Recording ended.");
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
@@ -137,7 +137,7 @@ public class TransposeActivity extends AppCompatActivity {
                 //isRecording = true;
                 mediaRecorder.prepare();
                 mediaRecorder.start();
-                Toast.makeText(TransposeActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TunerActivity.this, "Recording started", Toast.LENGTH_SHORT).show();
 
                 micStatusTextView.setText("Recording...");
                 //isRecording = true;
@@ -145,14 +145,14 @@ public class TransposeActivity extends AppCompatActivity {
             }
             micFlag = true;
             if (micFlag == true) {
-                Toast.makeText(TransposeActivity.this, "Recording...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TunerActivity.this, "Recording...", Toast.LENGTH_SHORT).show();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(TunerActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
             e.printStackTrace();
-            Toast.makeText(TransposeActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(TunerActivity.this, "Recording failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
