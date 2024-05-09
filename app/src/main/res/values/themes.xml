@@ -9,6 +9,12 @@
 <!--        <item name="colorAccent">@color/beaver</item>-->
 
 <!--        <item name="android:windowContentTransitions">true</item>-->
+        <item name="buttonStyle">@style/DefaultButton</item>
+    </style>
+
+    <style name="DefaultButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/cape_cod</item>
+        <item name="android:textColor">@color/desert_storm</item>
     </style>
 
     <style name="LOGO">

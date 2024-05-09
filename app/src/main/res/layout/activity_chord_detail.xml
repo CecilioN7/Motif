@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREEN"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        style="@style/TEXT_MAIN"
+        android:id="@+id/chordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+    <TextView
+        style="@style/TEXT"
+        android:text="Notes: C E G"
+        android:id="@+id/chordNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textSize="18sp" />
+
+</LinearLayout>

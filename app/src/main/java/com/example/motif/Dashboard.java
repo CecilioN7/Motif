@@ -1,22 +1,22 @@
 package com.example.motif;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -81,6 +81,13 @@ public class Dashboard extends AppCompatActivity {
                 //drawerLayout.closeDrawer(GravityCompat.START);
             }else if (menuItem.getItemId()==R.id.notepad) {
                 Intent intent = new Intent(Dashboard.this, NotepadList.class);
+                intent.putExtra("user", getIntent().getStringExtra("user"));
+
+                startActivity(intent);
+                //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
+            }else if (menuItem.getItemId()==R.id.chord) {
+                Intent intent = new Intent(Dashboard.this, ChordList.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
 
                 startActivity(intent);

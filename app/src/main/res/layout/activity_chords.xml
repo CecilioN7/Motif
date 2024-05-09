@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREEN"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/chordList"
+    android:padding="20dp">
+
+    <ImageView
+        style="@style/LOGO"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        style="@style/TEXT_MAIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chords"
+        android:textSize="40sp" />
+
+    <TextView
+        style="@style/TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chord Categories"
+        android:textSize="18sp" />
+
+    <!-- Elements or placeholders to be dynamically populated -->
+</LinearLayout>

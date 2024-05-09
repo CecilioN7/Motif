@@ -5,8 +5,15 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/desert_storm</item>
+        <item name="buttonStyle">@style/DefaultButton</item>
         <!--dark mode-->
         </style>
+
+        <style name="DefaultButton" parent="Widget.AppCompat.Button">
+            <item name="android:backgroundTint">@color/desert_storm</item>
+            <item name="android:textColor">@color/cape_cod</item>
+        </style>
+
         <style name = "LOGO">
             <item name="android:src">@drawable/motif_logo</item>
         </style>

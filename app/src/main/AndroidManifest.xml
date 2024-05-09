@@ -20,6 +20,15 @@
         android:theme="@style/Theme.Motif"
         tools:targetApi="31">
         <activity
+            android:name=".ChordDetail"
+            android:exported="false" />
+        <activity
+            android:name=".Chords"
+            android:exported="false" />
+        <activity
+            android:name=".ChordList"
+            android:exported="false" />
+        <activity
             android:name=".NotepadList"
             android:exported="false" />
         <activity
