@@ -202,6 +202,9 @@ public class NotepadList extends AppCompatActivity {
             }
             result = responseOutput.toString();
             if (result.equals("[]")) {
+                synchronized (this){
+                    notifyAll();
+                }
                 return false;
             }
             returnedJSON = new JSONArray(result);
@@ -218,7 +221,6 @@ public class NotepadList extends AppCompatActivity {
                 }
                 synchronized (this){
                     notifyAll();
-
                 }
                 return true;
             } catch(JSONException e){
