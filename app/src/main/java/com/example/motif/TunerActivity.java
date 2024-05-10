@@ -1,6 +1,7 @@
 package com.example.motif;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -30,7 +31,7 @@ public class TunerActivity extends AppCompatActivity {
     private final Handler noteHandler = new Handler(); //test noteTranslate
     private Random randnum = new Random(); //test noteTranslate
     MediaRecorder mediaRecorder; //For mic recording
-    Button buttonStart, buttonStop; // Add reference to button
+    Button buttonStart, buttonStop, buttonBack; // Add reference to button
     TextView recordedNoteTextView; // Add reference to the TextView
     TextView micStatusTextView;
     TextView samplerateview;
@@ -58,10 +59,17 @@ public class TunerActivity extends AppCompatActivity {
 
         buttonStart = findViewById(R.id.RecordButton);
         buttonStop = findViewById(R.id.StopButton);
+        buttonBack = findViewById(R.id.backButton);
         recordedNoteTextView = findViewById(R.id.NoteTextView);
         micStatusTextView = findViewById(R.id.StatusTextView);
         samplerateview = findViewById(R.id.rateTextView);
 
+        buttonStop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(TunerActivity.this, Dashboard.class);
+            }
+
+        });
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +177,7 @@ public class TunerActivity extends AppCompatActivity {
                 String[] notes = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
                 String randomNote = notes[randnum.nextInt(notes.length)];
 
-                recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
+          //      recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
                 try {
                     if (micFlag) {
                         noteThread();
@@ -220,7 +228,9 @@ public class TunerActivity extends AppCompatActivity {
        // String fileName = fnum + ".txt";
         //fnum = fnum + 1;
         String note = noteFrequency(frequency);// pass the frequency recorded
-        samplerateview.setText(note);//left off here, run
+
+       // samplerateview.setText(note);//left off here, run
+        recordedNoteTextView.setText("Note Played: " + note);  //set text to display current note
        // samplerateview.setText(" ");
         //--------------------------------------------------------------------------
 
@@ -298,7 +308,7 @@ public class TunerActivity extends AppCompatActivity {
         }
 
         // If the frequency doesn't match any note, return an empty string or null
-        return "";
+        return "None";
     }
 
     // permission handler
