@@ -10,7 +10,6 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 import java.io.IOException;
 import java.util.Random;
 
@@ -29,32 +27,30 @@ public class TunerActivity extends AppCompatActivity {
     private static final int writeRequest = 1;
     private boolean micFlag = false;
     private final Handler noteHandler = new Handler(); //test noteTranslate
-    private Random randnum = new Random(); //test noteTranslate
-    MediaRecorder mediaRecorder; //For mic recording
+
     Button buttonStart, buttonStop, buttonBack; // Add reference to button
     TextView recordedNoteTextView; // Add reference to the TextView
     TextView micStatusTextView;
-    TextView samplerateview;
+
     String AudioSavePathInDevice = null;
 
-    Random random;
-    String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
+
     public static final int RequestPermissionCode = 1;
-    MediaPlayer mediaPlayer;
+
     int sampleRate = 0; // Standard Hz sample rate
     int channel = 0;
     int format = 0;
     int buffer = 0;
+    int bytesRead = 0;
     byte[] buffersize;
     short[] audiobuffer = new short[buffer / 2];
     AudioRecord record;
     Thread thread;
-    int fnum = 0;
-    int bytesRead = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_tuner);
 
         buttonStart = findViewById(R.id.RecordButton);
@@ -62,11 +58,13 @@ public class TunerActivity extends AppCompatActivity {
         buttonBack = findViewById(R.id.backButton);
         recordedNoteTextView = findViewById(R.id.NoteTextView);
         micStatusTextView = findViewById(R.id.StatusTextView);
-        samplerateview = findViewById(R.id.rateTextView);
 
-        buttonStop.setOnClickListener(new View.OnClickListener() {
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(TunerActivity.this, Dashboard.class);
+                startActivity(intent);
+                finish();
             }
 
         });
@@ -84,8 +82,6 @@ public class TunerActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(TunerActivity.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                    // if permission allowed, call the recording function
-                    //  micRecording();
                 }
             }
         });
@@ -98,14 +94,9 @@ public class TunerActivity extends AppCompatActivity {
                     try {
                         micFlag = false;
                         record.stop();
-                        //  mediaRecorder.reset();
                         record.release();
-
-                        //   mediaRecorder.release();
-                        //    mediaRecorder.reset();
-                        //   mediaRecorder.release();
                         record = null;
-                        //    mediaRecorder = null;
+
                         recordedNoteTextView.setText("");
                         Toast.makeText(TunerActivity.this, "Stop Recording", Toast.LENGTH_SHORT).show();
                         micStatusTextView.setText("Recording ended.");
@@ -117,9 +108,6 @@ public class TunerActivity extends AppCompatActivity {
             }
         });
 
-        //set text to display current note
-        //String recordedNote = "C#"; //placeholder
-        //  recordedNoteTextView.setText("Note Played: " + recordedNote);
     }
 
 
@@ -135,7 +123,7 @@ public class TunerActivity extends AppCompatActivity {
             return;
         }
 
-
+        //parameters for audio analysis
         sampleRate = 44100;
         channel = AudioFormat.CHANNEL_IN_MONO;
         format = AudioFormat.ENCODING_PCM_16BIT;
@@ -165,19 +153,11 @@ public class TunerActivity extends AppCompatActivity {
     }
 
     public void noteThread() throws IOException {
-        //--------------------------------------------------------------------------------------------------
-        //Text view test code to see if the function call to notesTranslate will update NotesTextView
-        //Remove when notesTranslate is functional
         noteHandler.postDelayed(new Runnable() {
             @Override
 
             public void run() {
 
-                // while (micFlag == true) {
-                String[] notes = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
-                String randomNote = notes[randnum.nextInt(notes.length)];
-
-          //      recordedNoteTextView.setText("Note Played: " + randomNote);  //set text to display current note
                 try {
                     if (micFlag) {
                         noteThread();
@@ -190,7 +170,6 @@ public class TunerActivity extends AppCompatActivity {
             //  }
         }, 2000);
 
-        //--------------------------------------------------------------------------------------------------
 
         thread = new Thread(new Runnable() {
 
@@ -200,74 +179,34 @@ public class TunerActivity extends AppCompatActivity {
 
                     buffersize = new byte[buffer];//data from audio
 
-                    //int bytesRead = record.read(buffer, 0, buffersize);
                     bytesRead = record.read(buffersize, 0, buffer);
-                  //  if (bytesRead > 0) {
-                   //     // function call to translation function
-                    //    noteTranslate(buffer, bytesRead);
-                  // }
+
                 }
             }
         });
         thread.start();
-        //if (bytesRead > 0) {
-            //     // function call to translation function
                 noteTranslate(buffer, bytesRead);
-          //   }
+
     }
 
     public void noteTranslate(int x, int y) {
-        //int listIndex = 0;
+
         // double frequency = calculateFrequency(audioBuffer, bufferSize);
 
         //double frequency = 320.0;// test frequency
         int frequency = calculateFrequency(sampleRate, audiobuffer);
-        //String[] list = new String[2000];
-        //String[] list = {"C", "C#", "D", "D#", "E"};//translated notes go into list, i put sample notes for now
-        //samplerateview.setText("in notes translate");
-       // String fileName = fnum + ".txt";
-        //fnum = fnum + 1;
         String note = noteFrequency(frequency);// pass the frequency recorded
 
-       // samplerateview.setText(note);//left off here, run
+
         recordedNoteTextView.setText("Note Played: " + note);  //set text to display current note
-       // samplerateview.setText(" ");
-        //--------------------------------------------------------------------------
 
-       // while (listIndex < list.length && list[listIndex] != null) {
-          //  listIndex++;
-       // }
-
-      //  if (listIndex == list.length) {
-          //  System.err.println("Warning: list array is full. Unable to add more notes.");
-          //  return;
-       // }
-
-       // list[listIndex] = note;
-        //-------------------------------------------------------------------------
-       // try {
-          //  FileWriter fwrite = new FileWriter(fileName);
-          //  BufferedWriter bufferedWriter = new BufferedWriter(fwrite);
-
-
-          //  for (int i = 0; i < list.length; i++) {
-           //     bufferedWriter.write(list[i]);
-           //     bufferedWriter.write(' ');
-         //   }
-
-
-          //  bufferedWriter.close();// end write
-          //  System.out.println("File writing is done.");
-      //  } catch (IOException e) {
-        //    System.err.println("Error writing to file: " + e.getMessage());
-      //  }
         thread.interrupt();//end tread once done;
     }
     public static int calculateFrequency(int hz, short [] data){
         int count = 0;
         int audiodata = data.length;
 
-        for (int i = 0; i < audiodata-1; i++)
+        for (int i = 0; i < audiodata - 1; i++)
         {
             if ((data[i] > 0 && data[i + 1] <= 0) || (data[i] < 0 && data[i + 1] >= 0))
             {
@@ -320,7 +259,6 @@ public class TunerActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
                     grantResults.length > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
-                // micRecording();
                 try {
                     micRecording();
                 } catch (IOException e) {
