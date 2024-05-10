@@ -1,25 +1,32 @@
 package com.example.motif;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+
+import android.os.Build;
+import android.view.Window;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatDelegate;
+import android.view.View;
+
 
 public class Dashboard extends AppCompatActivity {
 
@@ -36,8 +43,30 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_dashboard);
+        Window window = getWindow();
+        View decorView = window.getDecorView();
+
+        // Retrieve the current night mode status
+        int nightMode = AppCompatDelegate.getDefaultNightMode();
+
+        // Determine the appropriate status bar color based on the night mode status
+        int statusBarColor;
+        if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            statusBarColor = R.color.desert_storm;
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        } else {
+            statusBarColor = R.color.cape_cod;
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        }
+
+        // Change the status bar color if API level is 21 or higher
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, statusBarColor));
+        }
 
         drawerLayout = findViewById(R.id.drawerLayout);
         materialToolbar = findViewById(R.id.materialToolbar);
@@ -81,6 +110,13 @@ public class Dashboard extends AppCompatActivity {
                 //drawerLayout.closeDrawer(GravityCompat.START);
             }else if (menuItem.getItemId()==R.id.notepad) {
                 Intent intent = new Intent(Dashboard.this, NotepadList.class);
+                intent.putExtra("user", getIntent().getStringExtra("user"));
+
+                startActivity(intent);
+                //Toast.makeText(Dashboard.this, "Settings", Toast.LENGTH_SHORT).show();
+                //drawerLayout.closeDrawer(GravityCompat.START);
+            }else if (menuItem.getItemId()==R.id.chord) {
+                Intent intent = new Intent(Dashboard.this, ChordList.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
 
                 startActivity(intent);
@@ -131,15 +167,25 @@ public class Dashboard extends AppCompatActivity {
             String[] noteArray = line.split("(?<=\\s)|(?=\\s)");
 
             for (String note : noteArray) {
-                if (note.trim().isEmpty()) {
+                String trimmedNote = note.trim();
+                boolean isMinor = trimmedNote.endsWith("m");
+
+                if (isMinor) {
+                    trimmedNote = trimmedNote.substring(0, trimmedNote.length() - 1);
+                }
+
+                if (trimmedNote.isEmpty()) {
                     // If it's a space or empty string, retain it
                     transposedLine.append(note);
                     continue;
                 }
 
-                int position = getNotePosition(note.trim());
+                int position = getNotePosition(trimmedNote);
+
                 if (position == -1) {
-                    transposedLine.append("Invalid ");
+                    // If the note is invalid, retain the original string
+                    transposedLine.append(trimmedNote);
+                    if (isMinor) transposedLine.append("m");
                     continue;
                 }
 
@@ -150,8 +196,11 @@ public class Dashboard extends AppCompatActivity {
                     newPosition = transposeDown(position, transposeValue);
                 }
 
-                transposedLine.append(displayNewNotePosition(newPosition, accidental));
+                String transposedNote = displayNewNotePosition(newPosition, accidental);
+                transposedLine.append(transposedNote);
+                if (isMinor) transposedLine.append("m");
             }
+
             transposedNotes.append(transposedLine.toString()).append("\n");
         }
 

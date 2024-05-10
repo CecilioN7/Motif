@@ -24,34 +24,39 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        style="@style/BUTTON"
         android:id="@+id/RecordButton"
-        android:contentDescription="@string/record_audio"
-        android:layout_width="0dp"
+        style="@style/BUTTON"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="536dp"
+        android:layout_marginTop="312dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/record_audio"
         android:text="@string/record"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:layout_constraintWidth_percent="0.5"
         tools:ignore="VisualLintButtonSize" />
 
     <Button
-        style="@style/BUTTON"
         android:id="@+id/StopButton"
-        android:layout_width="0dp"
-        android:contentDescription="@string/stop_recording"
+        style="@style/BUTTON"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:contentDescription="@string/stop_recording"
         android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RecordButton"
+        app:layout_constraintVertical_bias="0.134"
         app:layout_constraintWidth_percent="0.25"
         tools:ignore="VisualLintButtonSize" />
+
     <Button
         style="@style/BUTTON"
         android:id="@+id/backButton"
@@ -78,16 +83,18 @@
         android:layout_marginTop="-182dp"/>
 
     <TextView
-        style="@style/TEXT_MAIN"
         android:id="@+id/rateTextView"
+        style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
         android:text="Frequency"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="@id/RecordButton"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@id/RecordButton"
-        app:layout_constraintTop_toTopOf="@id/RecordButton"
-        android:layout_marginTop="-222dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/backButton" />
+
     <TextView
         style="@style/TEXT"
         android:id="@+id/StatusTextView"

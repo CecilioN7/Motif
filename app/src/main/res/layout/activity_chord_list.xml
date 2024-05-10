@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SCREEN"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        style="@style/LOGO"
+        android:id="@+id/logoImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:transitionName="logo_image"
+        android:contentDescription="@string/todo3" />
+
+    <TextView
+        style="@style/TEXT_MAIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHORDS"
+        android:textSize="40sp"
+        android:transitionName="logo_text" />
+    <TextView
+        style="@style/TEXT"
+        android:id="@+id/slogan_name"
+        android:contentDescription="@+id/slogan_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chord Library"
+        android:textSize="18sp" />
+
+    <!-- First Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_C"
+            android:text="C"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_Csharp"
+            android:text="C#"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Second Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_D"
+            android:text="D"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_Dsharp"
+            android:text="D#"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Third Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_E"
+            android:text="E"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_F"
+            android:text="F"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Fourth Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_Fsharp"
+            android:text="F#"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_G"
+            android:text="G"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Fifth Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_Gsharp"
+            android:text="G#"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_A"
+            android:text="A"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Sixth Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:weightSum="2">
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_Asharp"
+            android:text="A#"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/BUTTON"
+            android:id="@+id/note_B"
+            android:text="B"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>
