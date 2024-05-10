@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <TextView
-        style="@style/TEXT_MAIN"
+        style="@style/TEXT_MAIN2"
         android:id="@+id/chordTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

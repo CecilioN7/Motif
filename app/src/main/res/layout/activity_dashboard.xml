@@ -125,6 +125,7 @@
 
     <!-- NavigationView for drawer menu -->
     <com.google.android.material.navigation.NavigationView
+        style="@style/CustomNavigationView"
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

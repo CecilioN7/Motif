@@ -12,6 +12,9 @@
 
         <!--dark mode-->
         </style>
+    <style name="CustomNavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="android:background">@color/cape_cod</item>
+    </style>
 
         <style name="DefaultButton" parent="Widget.AppCompat.Button">
             <item name="android:backgroundTint">@color/desert_storm</item>
@@ -39,6 +42,10 @@
             <item name="fontFamily">@font/bebas_neue</item>
             <item name="android:textColor">@color/desert_storm</item>
         </style>
+    <style name="TEXT_MAIN2">
+        <item name="fontFamily">@font/bebas_neue_pro</item>
+        <item name="android:textColor">@color/desert_storm</item>
+    </style>
 
         <style name="TEXT_MAINI">
             <item name="fontFamily">@font/bebas_neue</item>
