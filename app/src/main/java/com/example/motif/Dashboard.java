@@ -167,15 +167,25 @@ public class Dashboard extends AppCompatActivity {
             String[] noteArray = line.split("(?<=\\s)|(?=\\s)");
 
             for (String note : noteArray) {
-                if (note.trim().isEmpty()) {
+                String trimmedNote = note.trim();
+                boolean isMinor = trimmedNote.endsWith("m");
+
+                if (isMinor) {
+                    trimmedNote = trimmedNote.substring(0, trimmedNote.length() - 1);
+                }
+
+                if (trimmedNote.isEmpty()) {
                     // If it's a space or empty string, retain it
                     transposedLine.append(note);
                     continue;
                 }
 
-                int position = getNotePosition(note.trim());
+                int position = getNotePosition(trimmedNote);
+
                 if (position == -1) {
-                    transposedLine.append("Invalid ");
+                    // If the note is invalid, retain the original string
+                    transposedLine.append(trimmedNote);
+                    if (isMinor) transposedLine.append("m");
                     continue;
                 }
 
@@ -186,8 +196,11 @@ public class Dashboard extends AppCompatActivity {
                     newPosition = transposeDown(position, transposeValue);
                 }
 
-                transposedLine.append(displayNewNotePosition(newPosition, accidental));
+                String transposedNote = displayNewNotePosition(newPosition, accidental);
+                transposedLine.append(transposedNote);
+                if (isMinor) transposedLine.append("m");
             }
+
             transposedNotes.append(transposedLine.toString()).append("\n");
         }
 
