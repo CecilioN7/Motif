@@ -19,13 +19,13 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
+                style="@style/SCREENI"
                 android:id="@+id/materialToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/nav_menu"
                 app:navigationIcon="@drawable/baseline_menu_24"
-                app:title="Motif"
-                app:titleTextColor="@color/desert_storm"/>
+                app:title="Motif"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Main content layout with the desired functionality -->
@@ -64,10 +64,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-
-
                     android:id="@+id/transposeInput"
                     android:contentDescription="@string/input_username"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>

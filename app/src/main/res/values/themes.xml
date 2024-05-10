@@ -10,11 +10,17 @@
 
 <!--        <item name="android:windowContentTransitions">true</item>-->
         <item name="buttonStyle">@style/DefaultButton</item>
+        <item name="android:statusBarColor">@color/desert_storm</item>
+        <item name="android:navigationBarColor">@color/desert_storm</item>
     </style>
 
     <style name="DefaultButton" parent="Widget.AppCompat.Button">
         <item name="android:backgroundTint">@color/cape_cod</item>
         <item name="android:textColor">@color/desert_storm</item>
+    </style>
+
+    <style name = "SHARE">
+        <item name="android:src">@drawable/baseline_add_link_24</item>
     </style>
 
     <style name="LOGO">
@@ -30,6 +36,7 @@
     </style>
 
     <style name = "SCREENI">
+        <item name="titleTextColor">@color/desert_storm</item>
         <item name="android:background">@color/cape_cod</item>
     </style>
 

@@ -6,6 +6,10 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/desert_storm</item>
         <item name="buttonStyle">@style/DefaultButton</item>
+        <item name="android:statusBarColor">@color/cape_cod</item>
+        <item name="android:navigationBarColor">@color/cape_cod</item>
+
+
         <!--dark mode-->
         </style>
 
@@ -27,6 +31,7 @@
         </style>
 
         <style name="SCREENI">
+            <item name="titleTextColor">@color/cape_cod</item>
             <item name="android:background">@color/desert_storm</item>
         </style>
 
