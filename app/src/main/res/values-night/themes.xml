@@ -5,21 +5,22 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/desert_storm</item>
-        <item name="buttonStyle">@style/DefaultButton</item>
         <item name="android:statusBarColor">@color/cape_cod</item>
         <item name="android:navigationBarColor">@color/cape_cod</item>
-
+        <item name="colorControlActivated">@color/select_color</item>
 
         <!--dark mode-->
         </style>
+
+    <style name="CustomToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!-- Specify your desired font -->
+        <item name="android:fontFamily">@font/bebas_neue</item>
+        <!-- Adjust other text attributes as needed -->
+        <item name="android:textSize">25sp</item>
+    </style>
     <style name="CustomNavigationView" parent="Widget.MaterialComponents.NavigationView">
         <item name="android:background">@color/cape_cod</item>
     </style>
-
-        <style name="DefaultButton" parent="Widget.AppCompat.Button">
-            <item name="android:backgroundTint">@color/desert_storm</item>
-            <item name="android:textColor">@color/cape_cod</item>
-        </style>
 
         <style name = "LOGO">
             <item name="android:src">@drawable/motif_logo</item>
