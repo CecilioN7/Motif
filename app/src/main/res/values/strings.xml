@@ -72,4 +72,9 @@
     <string name="note_preview">Note preview</string>
     <string name="your_notes">Your notes</string>
     <string name="new_note">New Note</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="account">Account</string>
+    <string name="notifications_and_appearance">Notifications And Appearance</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="logo">logo</string>
 </resources>

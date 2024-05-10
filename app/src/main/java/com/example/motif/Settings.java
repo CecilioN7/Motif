@@ -269,7 +269,7 @@ public class Settings extends AppCompatActivity {
 
             urlConnection.connect();
             int responseCode = urlConnection.getResponseCode();
-            StringBuffer responseOutput = new StringBuffer();
+            StringBuilder responseOutput = new StringBuilder();
 
             Log.d("Response", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
