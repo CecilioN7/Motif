@@ -1,11 +1,11 @@
 package com.example.motif;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,8 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
-import java.util.Random;
 
+/** @noinspection ALL*/
 public class TunerActivity extends AppCompatActivity {
 
     private static final int writeRequest = 1;
@@ -32,7 +32,6 @@ public class TunerActivity extends AppCompatActivity {
     TextView recordedNoteTextView; // Add reference to the TextView
     TextView micStatusTextView;
 
-    String AudioSavePathInDevice = null;
 
 
     public static final int RequestPermissionCode = 1;
@@ -40,10 +39,12 @@ public class TunerActivity extends AppCompatActivity {
     int sampleRate = 0; // Standard Hz sample rate
     int channel = 0;
     int format = 0;
-    int buffer = 0;
+    int buffer = 256;
     int bytesRead = 0;
     byte[] buffersize;
     short[] audiobuffer = new short[buffer / 2];
+
+    //short[] audiobuffer = {123, -456, 789, 321, -654, 987};
     AudioRecord record;
     Thread thread;
 
@@ -60,33 +61,29 @@ public class TunerActivity extends AppCompatActivity {
         micStatusTextView = findViewById(R.id.StatusTextView);
 
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(TunerActivity.this, Dashboard.class);
-                startActivity(intent);
-                finish();
-            }
 
+        buttonBack.setOnClickListener(v -> {
+            Intent intent = new Intent(TunerActivity.this, Dashboard.class);
+            startActivity(intent);
+            finish();
         });
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
-                        ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(TunerActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
+        buttonStart.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(TunerActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(TunerActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
 
-                } else {
-                    try {
-                        micRecording();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Toast.makeText(TunerActivity.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            } else {
+                try {
+                    micRecording();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(TunerActivity.this, "Error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
         //function for stopping the microphone recording
         buttonStop.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 //stop the recording
@@ -112,6 +109,7 @@ public class TunerActivity extends AppCompatActivity {
 
 
     // Microphone recording function
+    @SuppressLint("SetTextI18n")
     private void micRecording() throws IOException {
         // Check if permission is granted and request the permission for mic and file access
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -129,7 +127,7 @@ public class TunerActivity extends AppCompatActivity {
         format = AudioFormat.ENCODING_PCM_16BIT;
         buffer = AudioRecord.getMinBufferSize(sampleRate, channel, format);
         record = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate, channel, format, buffer);
-
+        audiobuffer = new short[buffer];
 
         if (record.getState() != AudioRecord.STATE_INITIALIZED) {
             Toast.makeText(this, "Failed to initialize AudioRecord", Toast.LENGTH_SHORT).show();
@@ -153,56 +151,47 @@ public class TunerActivity extends AppCompatActivity {
     }
 
     public void noteThread() throws IOException {
-        noteHandler.postDelayed(new Runnable() {
-            @Override
+        //  }
+        noteHandler.postDelayed(() -> {
 
-            public void run() {
+            try {
+                if (micFlag) {
+                    noteThread();
 
-                try {
-                    if (micFlag) {
-                        noteThread();
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            //  }
         }, 2000);
 
 
-        thread = new Thread(new Runnable() {
+        thread = new Thread(() -> {
+            while (micFlag) {
 
-            @Override
-            public void run() {
-                while (micFlag) {
+                buffersize = new byte[buffer];//data from audio
+                bytesRead = record.read(buffersize, 0, buffer);
 
-                    buffersize = new byte[buffer];//data from audio
 
-                    bytesRead = record.read(buffersize, 0, buffer);
-
-                }
             }
         });
         thread.start();
-                noteTranslate(buffer, bytesRead);
+                noteTranslate(buffer);
 
     }
 
-    public void noteTranslate(int x, int y) {
+    @SuppressLint("SetTextI18n")
+    public void noteTranslate(int x) {
 
-        // double frequency = calculateFrequency(audioBuffer, bufferSize);
-
-        //double frequency = 320.0;// test frequency
-        int frequency = calculateFrequency(sampleRate, audiobuffer);
-        String note = noteFrequency(frequency);// pass the frequency recorded
+        float frequency = calculateFrequency(sampleRate, audiobuffer);
 
 
-        recordedNoteTextView.setText("Note Played: " + note);  //set text to display current note
+        String note = noteFrequency(frequency);
+        recordedNoteTextView.setText("Note Played: " + note);
+
 
         thread.interrupt();//end tread once done;
     }
-    public static int calculateFrequency(int hz, short [] data){
+    public static float calculateFrequency(float hz, short [] data){
         int count = 0;
         int audiodata = data.length;
 
@@ -213,10 +202,10 @@ public class TunerActivity extends AppCompatActivity {
                 count = count + 1;
             }
         }
-        float rate= count / 2;
+        float rate= (float) count / 2;
         float time1 = (float)audiodata / (float)hz;
         float frequency = rate/time1;
-        return (int)frequency;
+        return (float)frequency;
     }
     public String noteFrequency(double frequency) {
 
@@ -252,7 +241,7 @@ public class TunerActivity extends AppCompatActivity {
 
     // permission handler
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == RequestPermissionCode) {

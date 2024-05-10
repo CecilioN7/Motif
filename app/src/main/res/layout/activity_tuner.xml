@@ -84,6 +84,8 @@
 
 
 
+
+
     <TextView
         style="@style/TEXT"
         android:id="@+id/StatusTextView"
