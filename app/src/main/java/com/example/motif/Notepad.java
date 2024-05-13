@@ -62,8 +62,7 @@ public class Notepad extends AppCompatActivity {
             // e.g., Add it to a list, database, or shared preferences
             // Placeholder for saving:
             attemptNewSheet(username, noteContent);
-            // Finish the current activity to prevent returning here accidentally
-            //finish();
+
         });
     }private void attemptNewSheet(String username, String note) {
         Log.d("Note:", note);
@@ -102,10 +101,10 @@ public class Notepad extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
+
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
-            //urlConnection.connect();
+
             int responseCode = urlConnection.getResponseCode();
             StringBuffer responseOutput = new StringBuffer();
 
@@ -140,7 +139,7 @@ public class Notepad extends AppCompatActivity {
         } catch(IOException e) { //| JSONException
             e.printStackTrace();
         }
-        //Log.d("LoginHash2", returnedPass.toString());
+
         return false;
     }
 }

@@ -132,7 +132,6 @@ public class Login extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
             urlConnection.connect();
@@ -172,7 +171,7 @@ public class Login extends AppCompatActivity {
                 return false;
             }
             returnedJSON = new JSONArray(result);
-            //Log.d("Result: ", String.valueOf(jsonResponse));
+
 
             returnedPass = returnedJSON.getString(0);
             jsonResponse = new JSONObject(returnedPass);
@@ -191,7 +190,7 @@ public class Login extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        //Log.d("LoginHash2", returnedPass.toString());
+
         return hash.equals(returnedPass);
     }
 }

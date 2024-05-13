@@ -107,7 +107,6 @@ public class SignUp extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
             urlConnection.connect();
@@ -152,7 +151,6 @@ public class SignUp extends AppCompatActivity {
         if (!EmailValidator.getInstance().isValid(email)){
             return false;
         } else if (checkRegisteredUsername(username)){
-            //Toast.makeText(this, "Username taken. Try another username", Toast.LENGTH_SHORT).show();
             return false;
         }
         apiUrl = apiUrl+ username;
@@ -174,11 +172,7 @@ public class SignUp extends AppCompatActivity {
             StringBuffer responseOutput = new StringBuffer();
 
             Log.d("Response", String.valueOf(responseCode));
-            if (responseCode == HttpURLConnection.HTTP_OK) {/*
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                hash = bytesToHex(encodedHash);
-                Log.d("hash", hash.toString());*/
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
@@ -214,35 +208,17 @@ public class SignUp extends AppCompatActivity {
                     error = error + email + "' for key 'user.";
                     error = error + "email'";
                     Log.d("Error2", error);
-                    //runOnUiThread(() -> Toast.makeText(SignUp.this, "Email is already in use", Toast.LENGTH_LONG).show());
+
                     return false;
                 }
             }
 
-            /*
-            if (result != null){
-                returnedJSON = new JSONArray(result);
-                returnedPass = returnedJSON.getString(0);
-                jsonResponse = new JSONObject(returnedPass);
-                returnedPass = jsonResponse.getString("password");
-                returnedUser = jsonResponse.getString("username");
 
-            } else {
-                return false;
-            }*/
-            //Log.d("Result: ", String.valueOf(jsonResponse));
-            /*
-            returnedJSON = new JSONArray(result);
-            returnedPass = returnedJSON.getString(0);
-            jsonResponse = new JSONObject(returnedPass);
-            returnedPass = jsonResponse.getString("password");
-            returnedUser = jsonResponse.getString("username");
-            */
         } catch(IOException e){ //| JSONException
             e.printStackTrace();
 
         }
-        //Log.d("LoginHash2", returnedPass.toString());
+
         if (result.equals("true")) {
             return true;
         } else {

@@ -57,7 +57,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_settings);
 
         currentPasswordEditText = findViewById(R.id.currentPasswordInput);
@@ -172,7 +172,6 @@ public class Settings extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
             urlConnection.connect();
@@ -210,7 +209,7 @@ public class Settings extends AppCompatActivity {
                 return false;
             }
             returnedJSON = new JSONArray(result);
-            //Log.d("Result: ", String.valueOf(jsonResponse));
+
 
             returnedPass = returnedJSON.getString(0);
             jsonResponse = new JSONObject(returnedPass);
@@ -220,7 +219,7 @@ public class Settings extends AppCompatActivity {
             Log.d("Database pass:", dbPass);
 
             return dbPass.equals(hash);
-            //Log.d("returnedPass:", returnedPass);
+
         } catch (IOException e) { //| JSONException
             e.printStackTrace();
 

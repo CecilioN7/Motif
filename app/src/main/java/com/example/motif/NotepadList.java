@@ -63,8 +63,6 @@ public class NotepadList extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
         itemTouchHelper.attachToRecyclerView(notesRecyclerView);
 
-        //notes.add("Sample Note 1\nDetails of the first note.");
-        //notes.add("Sample Note 2\nDetails of the second sample note.");
 
         attemptNotesheets();
         synchronized (this){
@@ -90,7 +88,6 @@ public class NotepadList extends AppCompatActivity {
     private void executeNotesheets(String username){
         executor.execute(() -> {
             Boolean result = getNotesheets(username);
-            //Log.d("Notesheets", String.valueOf(result));
             handler.post(() -> {
                 if (result){
                     CharSequence error = "Notesheets loaded!";
@@ -98,7 +95,7 @@ public class NotepadList extends AppCompatActivity {
                     Toast toast = Toast.makeText(this, error, dur);
                     toast.show();
 
-                    //finish();
+
                 }
             });
         });
@@ -113,10 +110,8 @@ public class NotepadList extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
-            //urlConnection.connect();
             int responseCode = urlConnection.getResponseCode();
             StringBuffer responseOutput = new StringBuffer();
             Scanner scanner = new Scanner(url.openStream());
@@ -148,11 +143,9 @@ public class NotepadList extends AppCompatActivity {
                 return String.valueOf(false);
             }
             returnedJSON = new JSONArray(result);
-            //Log.d("Result: ", String.valueOf(jsonResponse));
             String returnedSheet = returnedJSON.getString(0);
             jsonResponse = new JSONObject(returnedSheet);
             returnedSheet = jsonResponse.getString("notes");
-            //Log.d("Notes: ", returnedSheet);
             return returnedSheet;
         } catch(IOException e){ //| JSONException
             e.printStackTrace();
@@ -172,10 +165,8 @@ public class NotepadList extends AppCompatActivity {
         try {
             URL url = new URL(apiUrl);
             urlConnection = (HttpURLConnection) url.openConnection();
-            //urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
-            //urlConnection.connect();
             int responseCode = urlConnection.getResponseCode();
             StringBuffer responseOutput = new StringBuffer();
 
@@ -208,13 +199,13 @@ public class NotepadList extends AppCompatActivity {
                 return false;
             }
             returnedJSON = new JSONArray(result);
-            //Log.d("Result: ", String.valueOf(jsonResponse));
+
             try{
                 for (int i =0; i <returnedJSON.length(); i++){
                     String returnedSheet = returnedJSON.getString(i);
                     jsonResponse = new JSONObject(returnedSheet);
                     returnedSheet = jsonResponse.getString("sheetID");
-                    //Log.d("Sheets ID: ", returnedSheet);
+
                     String note = getSheetByID(returnedSheet);
                     notes.add(note);
 
