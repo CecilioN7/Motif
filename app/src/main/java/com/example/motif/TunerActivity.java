@@ -44,7 +44,7 @@ public class TunerActivity extends AppCompatActivity {
     byte[] buffersize;
     short[] audiobuffer = new short[buffer / 2];
 
-    //short[] audiobuffer = {123, -456, 789, 321, -654, 987};
+
     AudioRecord record;
     Thread thread;
 
@@ -151,7 +151,7 @@ public class TunerActivity extends AppCompatActivity {
     }
 
     public void noteThread() throws IOException {
-        //  }
+
         noteHandler.postDelayed(() -> {
 
             try {
