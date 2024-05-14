@@ -29,7 +29,8 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/notepad"
             android:gravity="top|start"
-            android:textColorHint="#546E7A" />
+            android:textColorHint="#546E7A"
+            tools:ignore="VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

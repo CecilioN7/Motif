@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
+//import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -18,12 +18,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+//import java.nio.charset.StandardCharsets;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+//import android.widget.ArrayAdapter;
+//import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -113,13 +114,13 @@ public class NotepadList extends AppCompatActivity {
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
             int responseCode = urlConnection.getResponseCode();
-            StringBuffer responseOutput = new StringBuffer();
+            StringBuilder responseOutput = new StringBuilder();
             Scanner scanner = new Scanner(url.openStream());
 
             Log.d("Response", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 scanner.close();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
                     }
@@ -168,11 +169,11 @@ public class NotepadList extends AppCompatActivity {
             urlConnection.setRequestProperty("Content-Type", "application/json");
 
             int responseCode = urlConnection.getResponseCode();
-            StringBuffer responseOutput = new StringBuffer();
+            StringBuilder responseOutput = new StringBuilder();
 
             Log.d("Response", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
                     }

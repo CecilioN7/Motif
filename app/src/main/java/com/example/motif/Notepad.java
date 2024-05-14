@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
+//import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+//import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+//import android.widget.ArrayAdapter;
+//import android.widget.ListView;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +21,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.nio.charset.StandardCharsets;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
+//import java.util.ArrayList;
+//import java.util.Scanner;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -56,7 +57,7 @@ public class Notepad extends AppCompatActivity {
         // Set up the "Save" button
         saveButton.setOnClickListener(v -> {
             // Get the note content from the input field
-            String noteContent = noteInput.getText().toString();
+            String noteContent = Objects.requireNonNull(noteInput.getText()).toString();
 
             // Save the note content here (replace with actual saving logic)
             // e.g., Add it to a list, database, or shared preferences
@@ -95,7 +96,7 @@ public class Notepad extends AppCompatActivity {
         apiUrl += "&notes=";
         apiUrl += note;
 
-        String result = "";
+        String result;
         HttpURLConnection urlConnection;
 
         try {

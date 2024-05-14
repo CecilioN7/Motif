@@ -1,19 +1,19 @@
 package com.example.motif;
 
-import static android.text.TextUtils.concat;
+//import static android.text.TextUtils.concat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+//import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
+//import android.view.View;
+//import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+//import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,22 +21,23 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.w3c.dom.Text;
+//import org.json.JSONTokener;
+//import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+//import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+//import java.io.OutputStream;
+//import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.channels.AsynchronousChannelGroup;
+//import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -77,8 +78,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String username = Objects.requireNonNull(usernameEditText.getText()).toString();
+        String password = Objects.requireNonNull(passwordEditText.getText()).toString();
 
         if (!username.isEmpty() && !password.isEmpty()) {
             executeLogin(username, password);
@@ -91,7 +92,7 @@ public class Login extends AppCompatActivity {
             handler.post(() -> {
                 if (result){
                     Intent toDash = new Intent(this, Dashboard.class);
-                    toDash.putExtra("user", usernameEditText.getText().toString());
+                    toDash.putExtra("user", Objects.requireNonNull(usernameEditText.getText()).toString());
                     startActivity(toDash);
                     //finish();
                 } else {
@@ -105,9 +106,9 @@ public class Login extends AppCompatActivity {
     }
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2* hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);
@@ -122,9 +123,9 @@ public class Login extends AppCompatActivity {
 
         apiUrl = apiUrl+ username;
         Log.d("Url:", apiUrl);
-        String result = "";
+        String result;
         JSONObject jsonResponse;
-        JSONArray returnedJSON = null;
+        JSONArray returnedJSON;
         String returnedPass = "";
         String hash = "";
         HttpURLConnection urlConnection;
@@ -136,7 +137,7 @@ public class Login extends AppCompatActivity {
 
             urlConnection.connect();
             int responseCode = urlConnection.getResponseCode();
-            StringBuffer responseOutput = new StringBuffer();
+            StringBuilder responseOutput = new StringBuilder();
             Scanner scanner = new Scanner(url.openStream());
 
             Log.d("Response", String.valueOf(responseCode));
@@ -144,10 +145,10 @@ public class Login extends AppCompatActivity {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
                 hash = bytesToHex(encodedHash);
-                Log.d("hash", hash.toString());
+                Log.d("hash", hash);
                 
                 scanner.close();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
                     }
@@ -185,9 +186,7 @@ public class Login extends AppCompatActivity {
         } catch(IOException e){ //| JSONException
             e.printStackTrace();
 
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (JSONException | NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
 

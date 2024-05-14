@@ -90,28 +90,28 @@ public class Dashboard extends AppCompatActivity {
             if(menuItem.getItemId()==R.id.home){
                 Toast.makeText(Dashboard.this, "Home", Toast.LENGTH_SHORT).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
-            } else if (menuItem.getItemId()==R.id.profile) {
+            } else if (menuItem.getItemId()==R.id.profile) { //dashboard
                 Intent intent = new Intent(Dashboard.this, Login.class);
                 startActivity(intent);
                 finish();
 
-            }else if (menuItem.getItemId()==R.id.transpose) {
+            }else if (menuItem.getItemId()==R.id.transpose) { //tuner
                 Intent intent = new Intent(Dashboard.this, TunerActivity.class);
                 startActivity(intent);
 
-            }else if (menuItem.getItemId()==R.id.settings) {
+            }else if (menuItem.getItemId()==R.id.settings) { //settings
                 Intent intent = new Intent(Dashboard.this, Settings.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
 
                 startActivity(intent);
 
-            }else if (menuItem.getItemId()==R.id.notepad) {
+            }else if (menuItem.getItemId()==R.id.notepad) { //notepad
                 Intent intent = new Intent(Dashboard.this, NotepadList.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
 
                 startActivity(intent);
 
-            }else if (menuItem.getItemId()==R.id.chord) {
+            }else if (menuItem.getItemId()==R.id.chord) {//chord list
                 Intent intent = new Intent(Dashboard.this, ChordList.class);
                 intent.putExtra("user", getIntent().getStringExtra("user"));
 

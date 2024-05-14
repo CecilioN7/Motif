@@ -48,7 +48,8 @@
             android:checked="true"
             android:fontFamily="@font/antic"
             android:minHeight="48dp"
-            android:text="@string/dark_mode" />
+            android:text="@string/dark_mode"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
         </LinearLayout>
 
     <TextView
@@ -70,7 +71,7 @@
             android:id="@+id/currentPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Current Password"
+            android:hint="@string/current_password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -78,7 +79,8 @@
                 android:id="@+id/currentPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +88,7 @@
             android:id="@+id/newPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New Password"
+            android:hint="@string/new_password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -94,7 +96,8 @@
                 android:id="@+id/newPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +105,7 @@
             android:id="@+id/confirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm New Password"
+            android:hint="@string/confirm_new_password"
             app:passwordToggleEnabled="true"
             android:layout_marginBottom="20dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -111,7 +114,8 @@
                 android:id="@+id/confirmPasswordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,7 +128,7 @@
             android:layout_marginBottom="5dp"
             android:onClick="attemptPasswordChange"
             android:text="@string/reset_password"
-            tools:ignore="TextContrastCheck" />
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
     </LinearLayout>
 

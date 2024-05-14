@@ -54,7 +54,8 @@
                 android:singleLine="true"
                 android:imeOptions="actionNext"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/input_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                tools:ignore="VisualLintTextFieldSize" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +99,7 @@
             android:layout_marginBottom="5dp"
             android:onClick="attemptLogin"
             android:text="GO"
-            tools:ignore="HardcodedText,TextContrastCheck" />
+            tools:ignore="HardcodedText,TextContrastCheck,VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON2"
@@ -111,7 +113,7 @@
             android:contentDescription="@string/go_to_signup"
             android:text="@string/new_user_sign_up"
             android:fontFamily="@font/antic"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded,VisualLintButtonSize" />
 
 
     </LinearLayout>

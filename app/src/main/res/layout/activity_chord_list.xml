@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +20,7 @@
         style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CHORDS"
+        android:text="@string/chords"
         android:textSize="40sp"
         android:transitionName="logo_text" />
     <TextView
@@ -28,7 +29,7 @@
         android:contentDescription="@+id/slogan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chord Library"
+        android:text="@string/chord_library"
         android:textSize="18sp" />
 
     <!-- First Row -->
@@ -43,19 +44,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_C"
-            android:text="C"
+            android:text="@string/c"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_Csharp"
-            android:text="C#"
+            android:text="@string/cs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <!-- Second Row -->
@@ -69,19 +72,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_D"
-            android:text="D"
+            android:text="@string/d"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_Dsharp"
-            android:text="D#"
+            android:text="@string/ds"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <!-- Third Row -->
@@ -95,19 +100,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_E"
-            android:text="E"
+            android:text="@string/e"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_F"
-            android:text="F"
+            android:text="@string/f"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <!-- Fourth Row -->
@@ -121,19 +128,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_Fsharp"
-            android:text="F#"
+            android:text="@string/fs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_G"
-            android:text="G"
+            android:text="@string/g"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <!-- Fifth Row -->
@@ -147,19 +156,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_Gsharp"
-            android:text="G#"
+            android:text="@string/gs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_A"
-            android:text="A"
+            android:text="@string/a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
     <!-- Sixth Row -->
@@ -173,19 +184,21 @@
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_Asharp"
-            android:text="A#"
+            android:text="@string/as"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="5dp" />
+            android:layout_marginEnd="5dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             style="@style/BUTTON"
             android:id="@+id/note_B"
-            android:text="B"
+            android:text="@string/b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
 </LinearLayout>

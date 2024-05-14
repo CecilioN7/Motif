@@ -10,20 +10,21 @@
     <ImageView
         style="@style/LOGO"
         android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_height="100dp"
+        android:contentDescription="@string/chords" />
 
     <TextView
         style="@style/TEXT_MAIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chords"
+        android:text="@string/chords"
         android:textSize="40sp" />
 
     <TextView
         style="@style/TEXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chord Categories"
+        android:text="@string/chord_categories"
         android:textSize="18sp" />
 
     <!-- Placeholder for dynamically added chord buttons -->

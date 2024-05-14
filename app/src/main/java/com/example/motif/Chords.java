@@ -24,6 +24,7 @@ public class Chords extends AppCompatActivity {
         LinearLayout verticalLayout = findViewById(R.id.chordList);
 
         // Retrieve the mapping of chord names and components for the given note
+        assert note != null;
         Map<String, String> chords = getChordsForNote(note);
 
         // Initialize a new row layout

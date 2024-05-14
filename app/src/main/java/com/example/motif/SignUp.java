@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.json.JSONObject;
+//import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,8 +23,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+//import java.nio.charset.StandardCharsets;
+//import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -72,11 +74,11 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void attemptRegister(){
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String email = emailEditText.getText().toString();
-        String phone = phoneEditText.getText().toString();
-        String name = nameEditText.getText().toString();
+        String username = Objects.requireNonNull(usernameEditText.getText()).toString();
+        String password = Objects.requireNonNull(passwordEditText.getText()).toString();
+        String email = Objects.requireNonNull(emailEditText.getText()).toString();
+        String phone = Objects.requireNonNull(phoneEditText.getText()).toString();
+        String name = Objects.requireNonNull(nameEditText.getText()).toString();
 
         if (!username.isEmpty() && !password.isEmpty() && !email.isEmpty() && !phone.isEmpty() && !name.isEmpty()) {
             executeRegister(username, password, email, name, phone);
@@ -116,7 +118,7 @@ public class SignUp extends AppCompatActivity {
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 scanner.close();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
                     }
@@ -173,7 +175,7 @@ public class SignUp extends AppCompatActivity {
 
             Log.d("Response", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null;){
                         responseOutput.append(line);
                     }

@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/note"
-                    android:hint="Enter notes (e.g., A B C)"
+                    android:hint="@string/enter_notes_e_g_a_b_c"
                     android:inputType="textMultiLine"
                     android:gravity="top"
                     android:scrollbars="vertical"
@@ -54,9 +54,10 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/noteInput"
-                        android:contentDescription="@string/input_username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,16 +65,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/transpose"
-                    android:hint="Transpose by (e.g., 1, -1)"
+                    android:hint="@string/transpose_by_e_g_1_1"
                     android:inputType="numberSigned"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/transposeInput"
-                        android:contentDescription="@string/input_username"
-                        android:singleLine="true"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="VisualLintTextFieldSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RadioGroup
@@ -89,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:checked="true"
-                        android:text="Sharp" />
+                        android:text="@string/sharp" />
 
                     <RadioButton
                         android:id="@+id/flatButton"
@@ -97,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Flat" />
+                        android:text="@string/flat" />
                 </RadioGroup>
 
                 <Button
@@ -107,7 +109,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_margin="5dp"
-                    android:text="Transpose" />
+                    android:text="@string/transpose"
+                    tools:ignore="VisualLintButtonSize" />
 
                 <TextView
                     style="@style/BUTTON2"
@@ -124,11 +127,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_margin="5dp"
-                    android:text="Copy to Clipboard" />
+                    android:text="@string/copy_to_clipboard"
+                    tools:ignore="VisualLintButtonSize" />
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#00000000"/>
+                    android:background="#00000000"
+                    tools:ignore="VisualLintButtonSize" />
             </LinearLayout>
 
         </ScrollView>
@@ -142,6 +147,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/header_menu" />
+        app:menu="@menu/header_menu"
+        tools:ignore="VisualLintBounds" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

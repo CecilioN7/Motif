@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
+//import android.view.View;
+//import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+//import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -33,6 +33,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -117,9 +118,9 @@ public class Settings extends AppCompatActivity {
     }
 
     private void attemptPasswordChange() {
-        String currentPassword = currentPasswordEditText.getText().toString();
-        String newPassword = newPasswordEditText.getText().toString();
-        String confirmPassword = confirmPasswordEditText.getText().toString();
+        String currentPassword = Objects.requireNonNull(currentPasswordEditText.getText()).toString();
+        String newPassword = Objects.requireNonNull(newPasswordEditText.getText()).toString();
+        String confirmPassword = Objects.requireNonNull(confirmPasswordEditText.getText()).toString();
 
         Log.d("currPass:", currentPassword);
         Log.d("newPass:", newPassword);
@@ -138,7 +139,7 @@ public class Settings extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        Log.d("Username", "" + username);
+        Log.d("Username", username);
         if (!username.isEmpty() && !currentPassword.isEmpty() && !confirmPassword.isEmpty() && !newPassword.isEmpty() && newPassword.equals(confirmPassword)){
             executeCheckPass(username, currentPassword, newPassHash);
         }
@@ -151,18 +152,16 @@ public class Settings extends AppCompatActivity {
                 if (result){
                     Log.d("Executing...", newPassHash);
                     executePasswordChange(newPassHash);
-                } else {
-                    return;
                 }
             });
         });
     }
     private Boolean checkPassword(String username, String password){
         HttpURLConnection urlConnection;
-        String result = "";
+        String result;
         String hash = "";
-        JSONArray returnedJSON = null;
-        String returnedPass = "";
+        JSONArray returnedJSON;
+        String returnedPass;
         JSONObject jsonResponse;
 
         String apiUrl = "http://143.198.246.13/motif/api/index.php/user/search?user=";
@@ -185,7 +184,7 @@ public class Settings extends AppCompatActivity {
                 byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
                 hash = bytesToHex(encodedHash);
                 scanner.close();
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null; ) {
                         responseOutput.append(line);
                     }
@@ -259,7 +258,7 @@ public class Settings extends AppCompatActivity {
         apiUrl = apiUrl + newPassword;
 
         Log.d("API:", apiUrl);
-        String result = "";
+        String result;
         HttpURLConnection urlConnection;
         try {
             URL url = new URL(apiUrl);
@@ -273,7 +272,7 @@ public class Settings extends AppCompatActivity {
             Log.d("Response", String.valueOf(responseCode));
             if (responseCode == HttpURLConnection.HTTP_OK) {
 
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
                     for (String line; (line = reader.readLine()) != null; ) {
                         responseOutput.append(line);
                     }
