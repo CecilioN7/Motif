@@ -7,24 +7,17 @@ class NotesheetsController extends BaseController
 		$strErrorDesc = '';
 		$request = $_SERVER["REQUEST_METHOD"];
 		$arrQueryStringParams = $this->getQueryStringParams();
-		//echo "prin111t";
 		if (strtoupper($request) == 'GET'){
 			try{
 				$notesheetsModel = new NotesheetsModel();
 				$userModel = new UserModel();
-				//echo "prin111t";
 				if (isset($arrQueryStringParams['user'])){
 					$user = $arrQueryStringParams['user'];
 					$arrID = $userModel->getID($user);
 					$ID = $arrID['0']['ID'];
-					#print_r($ID);
 				}
 				$notesheets = $notesheetsModel->getUserSheets($ID);
-				//echo "prin111t";
-				#$arrUsers = $notesheetsModel->getUserSheets($ID);
-				#echo "pri555int";
 				$responseData = json_encode($notesheets);	
-				//echo "print";
 			} catch (Error $e) {
 				$strErrorDesc = $e->getMessage().' Something went wrong!';
 				$strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
@@ -50,21 +43,15 @@ class NotesheetsController extends BaseController
 		$strErrorDesc = '';
 		$request = $_SERVER["REQUEST_METHOD"];
 		$arrQueryStringParams = $this->getQueryStringParams();
-		//echo "prin111t";
 		if (strtoupper($request) == 'GET'){
 			try{
 				$notesheetsModel = new NotesheetsModel();
-				//echo "prin111t";
 				if (isset($arrQueryStringParams['ID']) && isset($arrQueryStringParams['notes'])){
 					$ID = $arrQueryStringParams['ID'];
 					$notes = $arrQueryStringParams['notes'];
 				}
 				$notesheets = $notesheetsModel->updateSheet($ID, $notes);
-				//echo "prin111t";
-				#$arrUsers = $notesheetsModel->getUserSheets($ID);
-				#echo "pri555int";
 				$responseData = json_encode($notesheets);	
-				//echo "print";
 			} catch (Error $e) {
 				$strErrorDesc = $e->getMessage().' Something went wrong!';
 				$strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
@@ -90,21 +77,16 @@ class NotesheetsController extends BaseController
 		$strErrorDesc = '';
 		$request = $_SERVER["REQUEST_METHOD"];
 		$arrQueryStringParams = $this->getQueryStringParams();
-		//echo "prin111t";
 		if (strtoupper($request) == 'GET'){
 			try{
 				$notesheetsModel = new NotesheetsModel();
 				$userModel = new UserModel();
-				//echo "prin111t";
 				if (isset($arrQueryStringParams['ID'])){
 					$ID = $arrQueryStringParams['ID'];
 				}
 				$notesheets = $notesheetsModel->removeSheet($ID);
-				//echo "prin111t";
-				#$arrUsers = $notesheetsModel->getUserSheets($ID);
-				#echo "pri555int";
+				
 				$responseData = json_encode($notesheets);	
-				//echo "print";
 			} catch (Error $e) {
 				$strErrorDesc = $e->getMessage().' Something went wrong!';
 				$strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
@@ -127,7 +109,6 @@ class NotesheetsController extends BaseController
 	}
 	public function sheetAction()
 	{
-		//echo "Wow!";	
 		$strErrorDesc = '';
 		$request = $_SERVER["REQUEST_METHOD"];
 		$arrQueryStringParams = $this->getQueryStringParams();
@@ -135,16 +116,11 @@ class NotesheetsController extends BaseController
 			try{
 				$notesheetsModel = new notesheetsModel();
 				//echo "Here!";
-				//print_r($arrQueryStringParams);
-				//echo $search;
-
 				$ID = 0;
 				if (isset($arrQueryStringParams['ID'])){
 					$ID = $arrQueryStringParams['ID'];
 					$arrSheet = $notesheetsModel->getSheet($ID);
 				}
-				//echo $arrQueryStringParams['search'];
-				//echo $search;
 				$responseData = json_encode($arrSheet);	
 			} catch (Error $e) {
 				$strErrorDesc = $e->getMessage().'Something went wrong!';
@@ -168,7 +144,6 @@ class NotesheetsController extends BaseController
 	}	
 	public function addAction()
 	{
-		//echo "Wow!";	
 		$strErrorDesc = '';
 		$request = $_SERVER["REQUEST_METHOD"];
 		$arrQueryStringParams = $this->getQueryStringParams();
@@ -176,10 +151,6 @@ class NotesheetsController extends BaseController
 			try{
 				$userModel = new UserModel();
 				$notesheetsModel = new NotesheetsModel();
-				//echo "Here!";
-				//print_r($arrQueryStringParams);
-				//echo $search;
-
 				$username = null;
 
 				if (isset($arrQueryStringParams['user']) && $arrQueryStringParams['user']){
